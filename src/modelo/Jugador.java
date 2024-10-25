@@ -14,6 +14,12 @@ public class Jugador {
     public Jugador() {
     }
 
+    public Jugador(String nombre, String apellido, String nacionalidad, int ranking) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nacionalidad = nacionalidad;
+        this.ranking = ranking;
+    }
     public Jugador(String nombre, String apellido, String nacionalidad, int ranking,int set) {
         this.nombre = nombre;
         this.apellido = apellido;
