@@ -56,6 +56,8 @@ public class Main {
                                         salirMenuS = true;
                                         break;
                                     case 2:
+                                        modelo.Torneo.iscribirJugadorDefecto();
+                                        salirMenuS = true;
                                         break;
                                     default:
                                         System.out.println("Solo numeros entre 1 y 2");
