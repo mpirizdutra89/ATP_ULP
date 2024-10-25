@@ -9,15 +9,17 @@ public class Jugador {
     private String apellido;
     private String nacionalidad;
     private int ranking;
+    private int set;
     /*CONSTRUCTORES*/
     public Jugador() {
     }
 
-    public Jugador(String nombre, String apellido, String nacionalidad, int ranking) {
+    public Jugador(String nombre, String apellido, String nacionalidad, int ranking,int set) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nacionalidad = nacionalidad;
         this.ranking = ranking;
+        this.set = set;
     }
     /*GETTERS & SETTERS*/
 
@@ -57,5 +59,6 @@ public class Jugador {
     public String toString() {
         return apellido + ", " + ranking;
     }
-     
+    //TODO
+    //método carga "Interface"
 }
