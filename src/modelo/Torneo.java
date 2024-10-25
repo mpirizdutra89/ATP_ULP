@@ -47,5 +47,25 @@ public class Torneo {
         }
       
     }
+    
+    public static void iscribirJugadorDefecto(){
+        listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1));
+        listaJugadores.add(new Jugador("Carlos", "Alcaraz", "España", 2));
+        listaJugadores.add(new Jugador("Daniil", "Medvedev", "Rusia", 3));
+        listaJugadores.add(new Jugador("Stefanos", "Tsitsipas", "Grecia", 4));
+        listaJugadores.add(new Jugador("Andrey", "Rublev", "Rusia", 5));
+        listaJugadores.add(new Jugador("Holger", "Rune", "Dinamarca", 6));
+        listaJugadores.add(new Jugador("Casper", "Ruud", "Noruega", 7));
+        listaJugadores.add(new Jugador("Jannik", "Sinner", "Italia", 8));
+        listaJugadores.add(new Jugador("Taylor", "Fritz", "EE.UU.", 9));
+        listaJugadores.add(new Jugador("Frances", "Tiafoe", "EE.UU.", 10));
+        listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11));
+        listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12));
+        listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13));
+        listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14));
+        listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15));
+        listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16));
+
+    }
 
 }
