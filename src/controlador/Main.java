@@ -2,7 +2,7 @@ package controlador;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import modelo.Torneo;
+
 
 /**
  * @author Ferrando Carlos
@@ -17,7 +17,7 @@ public class Main {
         sc = new Scanner(System.in);
         boolean salirMenuP = false;
         int opcionMenuP;
-        String menu;
+        
 
         while (!salirMenuP) {
            
@@ -61,7 +61,7 @@ public class Main {
                                         salirMenuS = true;
                                         break;
                                     case 2:
-                                        modelo.Torneo.ileerribirJugadorDefecto();
+                                        modelo.Torneo.ileerribirJugadorDefecto();;
                                         salirMenuS = true;
                                         break;
                                     default:
