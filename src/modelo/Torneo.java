@@ -1,54 +1,109 @@
 package modelo;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
+ * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas
+ *         2-3-4--5- array 7-16
  */
 public class Torneo {
 
-    public static ArrayList<Jugador> listaJugadores = new ArrayList<>();
+    private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
 
-    public static void inscribirJugadorManual() {
-        Jugador jugadorNuevo = null;
+    public static void inleerribirJugadorManual() {
+        vaciarListaJugadores();
+        boolean insertado = false;
+
+        System.out.println("\n\n ___Inscripcion de jugadores___\n");
+        System.out.println("Nota: Cantidad de jugadores posibles 4-8-16-32-64.");
+        String ranker = "";
         int jugadores;
-        
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingresar la cantidad de jugadores a inscribir: ");
-        System.out.println("Puede inscribir 4-8-16-32-64 jugadores");
+        Scanner leer = new Scanner(System.in);
 
-        jugadores = sc.nextInt();
+        System.out.print("\n\n___Ingrese la cantidad: ");
+        jugadores = leerScannerEntero(leer.nextLine(), "\n___Por defecto se cargo un torneo para 4 jugadores___");// para
+                                                                                                                  // evitar
+                                                                                                                  // perdida
+                                                                                                                  // ded
+                                                                                                                  // tiempo
 
         if (jugadores != 4 && jugadores != 8 && jugadores != 16 && jugadores != 32 && jugadores != 64) {
-            System.out.println("Solo puede inscribir 4-8-16-32-64 jugadores");
-            return;
+            // leer.close();
+            System.out.println("\n\n Nota:Cantidad de jugadores posibles 4-8-16-32-64. (se carga por default 4)\n\n");
+            jugadores = 4;
+        } else {
+            System.out.println("\n\n __Cantidad de jugadores del torneo: " + jugadores + "\n");
         }
-        
-        sc.nextLine();//limpiar buffer
-        //Cargar jugadores Manualmente
+
+        // leer.nextLine();//limpiar buffer
+        // Cargar jugadores Manualmente
         for (int i = 0; i < jugadores; i++) {
-            System.out.println("Datos jugador "+ i+1 +":");
-            
-            System.out.println("Apellido: ");
-            String apellido = sc.nextLine();
-            
-            System.out.println("Nombre: ");
-            String nombre = sc.nextLine();
-  
-            System.out.println("Nacionalidad: ");
-            String nacionalidad = sc.nextLine();
-            
-            System.out.println("Ranking: ");
-            int ranking = sc.nextInt();
-            sc.nextLine();//limpiar buffer
-            
-            listaJugadores.add(new Jugador(nombre, apellido, nacionalidad, ranking));
+            System.out.println("\n__Datos jugador " + (i + 1) + ":");
+
+            System.out.print("Apellido: ");
+            String apellido = leer.nextLine();
+
+            System.out.print("Nombre: ");
+            String nombre = leer.nextLine();
+
+            System.out.print("Nacionalidad: ");
+            String nacionalidad = leer.nextLine();
+
+            System.out.print("Ranking: ");
+            int ranking = leerScannerEntero(leer.nextLine(), "\n__Deve ingresar un ranker valido y sin repetir.");
+
+            // leer.nextLine();//limpiar buffer
+
+            insertado = listaJugadores.add(new Jugador(nombre, apellido, nacionalidad, ranking));
+            while (!insertado) {
+                printListadoJugadoresActual();
+                System.out.print("Ingrese ranking nuevamente para :(" + apellido + " " + nombre + "): ");
+                ranking = leerScannerEntero(leer.nextLine(),
+                        "Deve ingresar un numero valido (que no exita en la lista de rankers),por defecto se le asigna el nr. 4");
+                insertado = listaJugadores.add(new Jugador(nombre, apellido, nacionalidad, ranking));
+            }
+
+        }
+        System.out.println("\n\n Jugadores Ingresados Correctamente.");
+        printListadoJugadoresActual();
+
+    }
+
+    private static void vaciarListaJugadores() {
+
+        listaJugadores.clear();
+    }
+
+    public static void printListadoJugadoresActual() {
+        
+        if(listaJugadores.size()>0){
+            System.out.println("\n\n___Lista de jugadores del torneo___\n");
+            for (Jugador jugador : listaJugadores) {
+                System.out.println("[" + jugador + "]");
+            }
+        }else{
+            System.out.println("  [ LISTA  JUGADORES VACIA ]");
         }
       
+        System.out.println("\n");
     }
-    
-    public static void iscribirJugadorDefecto(){
+
+    private static int leerScannerEntero(String numero, String msjError) {
+        int opcion;
+        try {
+
+            opcion = Integer.parseInt(numero); // Convierte el texto a número entero
+
+        } catch (NumberFormatException e) {
+            opcion = 4;
+            System.out.println(msjError);
+        }
+        return opcion;
+    }
+
+    public static void ileerribirJugadorDefecto() {
+        vaciarListaJugadores();
         listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1));
         listaJugadores.add(new Jugador("Carlos", "Alcaraz", "España", 2));
         listaJugadores.add(new Jugador("Daniil", "Medvedev", "Rusia", 3));

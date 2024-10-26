@@ -1,6 +1,8 @@
 
 package modelo;
 
+import java.util.Objects;
+
 /**
  * @author Ferrando Carlos
  */
@@ -60,11 +62,33 @@ public class Jugador {
     public void setRanking(int ranking) {
         this.ranking = ranking;
     }
+
+    public int getSet() {
+        return set;
+    }
+
+    public void setSet(int set) {
+        this.set = set;
+    }
     /*toString*/
     @Override
     public String toString() {
         return apellido + ", " + ranking;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jugador jugador = (Jugador) o;
+        return ranking == jugador.ranking; // Comparar solo por ranking
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ranking); // Hash solo por ranking
+    }
+    
     //TODO
     //método carga "Interface"
 }

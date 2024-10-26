@@ -8,18 +8,20 @@ import modelo.Torneo;
  * @author Ferrando Carlos
  */
 public class Main {
-
+    static Scanner sc;;
     public static void main(String[] args) {
         menu();
     }
 
     public static void menu() {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         boolean salirMenuP = false;
         int opcionMenuP;
+        String menu;
 
         while (!salirMenuP) {
-            System.out.println("**************************************************************");
+           
+            System.out.println("\n\n**************************************************************");
             System.out.println("****************  BIENVENIDO AL MENU ATP ULP  ****************");
             System.out.println("****   ¿Que desea hacer?. Seleccione la opción deseada:   ****");
             System.out.println("**************************************************************");
@@ -27,16 +29,18 @@ public class Main {
             System.out.println("******   2 -                                         *********");
             System.out.println("******   3 -                                         *********");
             System.out.println("******   4 -                                         *********");
-            System.out.println("******   5 -                                         *********");
+            System.out.println("******   5 - Lista Jugadores                                        *********");
             System.out.println("******   6 - Salir                                   *********");
             System.out.println("**************************************************************");
 
             try {
                 System.out.println("Escribe una de las opciones: ");
-                opcionMenuP = sc.nextInt();
+              
+                 opcionMenuP=sc.nextInt();
 
                 switch (opcionMenuP) {
                     case 1:
+                    limpiarConsola();
                         int opcionMenuS;
                         boolean salirMenuS = false;
                         while (!salirMenuS) {
@@ -49,20 +53,23 @@ public class Main {
                             try {
                                 System.out.println("Escribe una de las opciones: ");
                                 opcionMenuS = sc.nextInt();
+                                
 
                                 switch (opcionMenuS) {
                                     case 1:
-                                        modelo.Torneo.inscribirJugadorManual();
+                                        modelo.Torneo.inleerribirJugadorManual();
                                         salirMenuS = true;
                                         break;
                                     case 2:
-                                        modelo.Torneo.iscribirJugadorDefecto();
+                                        modelo.Torneo.ileerribirJugadorDefecto();
                                         salirMenuS = true;
                                         break;
                                     default:
                                         System.out.println("Solo numeros entre 1 y 2");
                                 }
                             } catch (InputMismatchException e) {
+                                salirMenuS=false;
+                                sc.nextLine();//para que vuelva a tomar el nextInt
                                 System.out.println("Debes insertar un numero!!");
                             }
                         }
@@ -75,6 +82,8 @@ public class Main {
                     case 4:
                         break;
                     case 5:
+                        limpiarConsola();
+                        modelo.Torneo.printListadoJugadoresActual();
                         break;
                     case 6:
                         salirMenuP = true;
@@ -85,6 +94,34 @@ public class Main {
             } catch (InputMismatchException e) {
                 System.out.println("Debes insertar un numero!!");
             }
+            
+            
+         // sc.close();
+        }
+        
+       
+    }
+
+    public static int leerScannerEntero(String numero){
+        int opcion;
+        try {
+             opcion = Integer.parseInt(numero); // Convierte el texto a número entero
+           
+        } catch (NumberFormatException e) {
+            opcion=4;
+        }
+        return opcion;
+    }
+    public static void limpiarConsola() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
