@@ -11,7 +11,7 @@ public class Torneo {
 
     private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
 
-    public static void inleerribirJugadorManual() {
+    public static void inscribirJugadorManual() {
         vaciarListaJugadores();
         boolean insertado = false;
 
@@ -21,13 +21,12 @@ public class Torneo {
         int jugadores;
         Scanner leer = new Scanner(System.in);
 
-        System.out.print("\n\n___Ingrese la cantidad: ");
-        jugadores = leerScannerEntero(leer.nextLine(), "\n___Por defecto se cargo un torneo para 4 jugadores___");// para
-                                                                                                                  // evitar
-                                                                                                                  // perdida
-                                                                                                                  // ded
-                                                                                                                  // tiempo
-
+        System.out.print("Ingrese la cantidad: ");
+        jugadores = leerScannerEntero(leer.nextLine(), "Por defecto se cargo un torneo para 4 jugadores");// para
+                                                                                                          // evitar
+                                                                                                          // perdida
+                                                                                                         // de
+                                                                                                         // tiempo
         if (jugadores != 4 && jugadores != 8 && jugadores != 16 && jugadores != 32 && jugadores != 64) {
             // leer.close();
             System.out.println("\n\n Nota:Cantidad de jugadores posibles 4-8-16-32-64. (se carga por default 4)\n\n");
@@ -102,7 +101,7 @@ public class Torneo {
         return opcion;
     }
 
-    public static void ileerribirJugadorDefecto() {
+    public static void inscribirJugadorDefecto() {
         vaciarListaJugadores();
         listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1));
         listaJugadores.add(new Jugador("Carlos", "Alcaraz", "España", 2));

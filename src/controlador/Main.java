@@ -21,15 +21,15 @@ public class Main {
 
         while (!salirMenuP) {
            
-            System.out.println("\n\n**************************************************************");
+            System.out.println("**************************************************************");
             System.out.println("****************  BIENVENIDO AL MENU ATP ULP  ****************");
-            System.out.println("****   ¿Que desea hacer?. Seleccione la opción deseada:   ****");
+            System.out.println("****   ¿Que desea hacer?. Seleccione la opcion deseada:   ****");
             System.out.println("**************************************************************");
             System.out.println("******   1 - Cargar Jugadores                        *********");
             System.out.println("******   2 -                                         *********");
             System.out.println("******   3 -                                         *********");
             System.out.println("******   4 -                                         *********");
-            System.out.println("******   5 - Lista Jugadores                                        *********");
+            System.out.println("******   5 - Lista Jugadores                         *********");
             System.out.println("******   6 - Salir                                   *********");
             System.out.println("**************************************************************");
 
@@ -57,11 +57,11 @@ public class Main {
 
                                 switch (opcionMenuS) {
                                     case 1:
-                                        modelo.Torneo.inleerribirJugadorManual();
+                                        modelo.Torneo.inscribirJugadorManual();
                                         salirMenuS = true;
                                         break;
                                     case 2:
-                                        modelo.Torneo.ileerribirJugadorDefecto();;
+                                        modelo.Torneo.inscribirJugadorDefecto();;
                                         salirMenuS = true;
                                         break;
                                     default:
