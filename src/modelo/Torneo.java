@@ -199,14 +199,14 @@ public class Torneo {
             System.out.println("\n\n __No se puede emparejar, sin jugadores__");
         }
     }
-
-    public static Jugador definirSets() {
-        Jugador jugador1 = null;
-        Jugador jugador2 = null;
+    /*
+        Definir Ganador Random
+    */
+    public static void definirSets() {
         if (totalJugadores > 0) {
             for (int i = 0; i < partidos.size(); i += 2) {
-                jugador1 = partidos.get(i);
-                jugador2 = partidos.get(i + 1);
+                Jugador jugador1 = partidos.get(i);
+                Jugador jugador2 = partidos.get(i + 1);
 
                 if (jugador1 != null && jugador2 != null) {
                     definirGanadorPartido(jugador1, jugador2);
@@ -214,17 +214,17 @@ public class Torneo {
             }
         } else {
             System.out.println("\n\n _No se puede definir sets, sin jugadores_");
+        }     
+    }
+
+    private static Jugador definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
+        while (jugador1.getSet() < 3 && jugador2.getSet() < 3) {
+            definirGanadorSet(jugador1, jugador2);
         }
         if (jugador1.getSet() == 3) {
             return jugador1;
         } else {
             return jugador2;
-        }
-    }
-
-    private static void definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
-        while (jugador1.getSet() < 3 && jugador2.getSet() < 3) {
-            definirGanadorSet(jugador1, jugador2);
         }
     }
 
