@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Torneo {
 
     private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
+    private static ArrayList<Jugador> listaJugadores2;
     private static ArrayList<Jugador> partidos = new ArrayList<>();
     private static int toltalJugadores = 0;
 
@@ -69,7 +70,9 @@ public class Torneo {
 
         }
         System.out.println("\n\n Jugadores Ingresados Correctamente.");
+        listaJugadores2 = new ArrayList<>(listaJugadores);
         printListadoJugadoresActual();
+        configurarTorneo();
 
     }
 
@@ -127,6 +130,10 @@ public class Torneo {
          * listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16));
          */
         toltalJugadores = listaJugadores.size();
+        // para poder ingresar a posiciones espesificas lo pasamos a
+        // una arrayList
+        listaJugadores2 = new ArrayList<>(listaJugadores);
+        printListadoJugadoresActual();
         configurarTorneo();
     }
 
@@ -144,19 +151,23 @@ public class Torneo {
 
     private static void configurarTorneo() {
         if (toltalJugadores > 0) {
+            System.out.println("\n\n___Inicio del torneo___");
+
             Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0);
-            int niveles = calcularNiveles();
+            int niveles = calcularNivele();
             int maxNodos = (int) Math.pow(2, niveles + 1) - 1;
 
             // System.out.println("Niveles:" + niveles + " max nodos posibles:" + maxNodos);
             for (int i = 0; i < maxNodos; i++) {
-                partidos.add(jugador);
+                partidos.add(jugador);// jugadores vacios
             }
+
+            emparejar();
 
         }
     }
 
-    private static int calcularNiveles() {
+    private static int calcularNivele() {
         int rondas = 0;
         if (toltalJugadores > 0) {
             rondas = (int) (Math.log(toltalJugadores) / Math.log(2));
@@ -166,12 +177,34 @@ public class Torneo {
         return rondas;
     }
 
+    private static int[] indiceNivelesArbol() {
+        int indiceInicio[] = new int[calcularNivele() + 1];
+        int nivel = 0;
+        while (Math.pow(2, nivel) - 1 < toltalJugadores) {
+            indiceInicio[nivel] = (int) Math.pow(2, nivel) - 1;
+            nivel++;
+        }
+
+        return indiceInicio;
+    }
+
     public static void emparejar() {
 
         if (toltalJugadores > 0) {
+            System.out.println("\n__Emparejar jugadores__\n");
+            int indices[] = indiceNivelesArbol();
+            int inicio = indices[indices.length - 1];
 
             for (int i = 0; i < (toltalJugadores / 2); i++) {
-                
+
+                partidos.set(inicio, listaJugadores2.get(i));
+
+                partidos.set(inicio + 1, listaJugadores2.get(i + (toltalJugadores / 2)));
+                System.out.println(
+                        "   __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
+                                + partidos.get(inicio + 1)
+                                + ")");
+                inicio += 2;
             }
 
         } else {
