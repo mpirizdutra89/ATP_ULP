@@ -5,7 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
+ * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas
+ *         2-3-4--5- array 7-16
  */
 public class Torneo {
 
@@ -72,7 +73,6 @@ public class Torneo {
         System.out.println("\n\n Jugadores Ingresados Correctamente.");
         listaJugadores2 = new ArrayList<>(listaJugadores);
         printListadoJugadoresActual();
-        configurarTorneo();
 
     }
 
@@ -134,23 +134,14 @@ public class Torneo {
         // una arrayList
         listaJugadores2 = new ArrayList<>(listaJugadores);
         printListadoJugadoresActual();
-        configurarTorneo();
+
     }
 
     /* Emparejamiento */
 
- /*
-     * 
-     * for (int i = 0; i < n / 2; i++) {
-     * Jugador jugadorIzquierdo = jugadores[i]; // Jugadores top del ranking
-     * Jugador jugadorDerecho = jugadores[i + n / 2]; // Jugadores de la mitad
-     * inferior
-     * partidos.Add(new Nodo(jugadorIzquierdo, jugadorDerecho));
-     * }
-     */
-    private static void configurarTorneo() {
+    public static void configurarTorneo() {
         if (toltalJugadores > 0) {
-            Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0,0);
+            Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0, 0);
             int niveles = calcularNivele();
             int maxNodos = (int) Math.pow(2, niveles + 1) - 1;
 
@@ -188,7 +179,7 @@ public class Torneo {
     public static void emparejar() {
 
         if (toltalJugadores > 0) {
-            System.out.println("\n__Emparejar jugadores__\n");
+            System.out.println("\n  __Emparejar jugadores__\n");
             int indices[] = indiceNivelesArbol();
             int inicio = indices[indices.length - 1];
 
@@ -198,7 +189,7 @@ public class Torneo {
 
                 partidos.set(inicio + 1, listaJugadores2.get(i + (toltalJugadores / 2)));
                 System.out.println(
-                        "   __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
+                        "     __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
                                 + partidos.get(inicio + 1)
                                 + ")");
                 inicio += 2;
