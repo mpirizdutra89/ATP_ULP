@@ -2,11 +2,11 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas
- *         2-3-4--5- array 7-16
+ * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
  */
 public class Torneo {
 
@@ -14,10 +14,10 @@ public class Torneo {
     private static ArrayList<Jugador> listaJugadores2;
     private static ArrayList<Jugador> partidos = new ArrayList<>();
     private static int totalJugadores = 0;
-    
+
     /*
         Método para cargar una lista de jugadores Manualmente
-    */
+     */
     public static void inscribirJugadorManual() {
         vaciarListaJugadores();
         boolean insertado = false;
@@ -72,7 +72,6 @@ public class Torneo {
         }
         System.out.println("\n\n Jugadores Ingresados Correctamente.");
         listaJugadores2 = new ArrayList<>(listaJugadores);
-       
 
     }
 
@@ -95,7 +94,7 @@ public class Torneo {
 
         System.out.println("\n");
     }
-    
+
     private static int leerScannerEntero(String numero, String msjError) {
         int opcion;
         try {
@@ -107,9 +106,10 @@ public class Torneo {
         }
         return opcion;
     }
+
     /*
         Método para cargar jugadores por defecto "rankig no actual"
-    */
+     */
     public static void inscribirJugadorDefecto() {
         vaciarListaJugadores();
         listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1, 0));
@@ -139,7 +139,6 @@ public class Torneo {
     }
 
     /* Emparejamiento */
-
     public static void configurarTorneo() {
         if (totalJugadores > 0) {
             Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0, 0);
@@ -191,8 +190,8 @@ public class Torneo {
                 partidos.set(inicio + 1, listaJugadores2.get(i + (totalJugadores / 2)));
                 System.out.println(
                         "     __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
-                                + partidos.get(inicio + 1)
-                                + ")");
+                        + partidos.get(inicio + 1)
+                        + ")");
                 inicio += 2;
             }
 
@@ -200,9 +199,53 @@ public class Torneo {
             System.out.println("\n\n __No se puede emparejar, sin jugadores__");
         }
     }
-    
-    
-    public static void definirSet(){
-    
+
+    public static Jugador definirSets() {
+        Jugador jugador1 = null;
+        Jugador jugador2 = null;
+        if (totalJugadores > 0) {
+            for (int i = 0; i < partidos.size(); i += 2) {
+                jugador1 = partidos.get(i);
+                jugador2 = partidos.get(i + 1);
+
+                if (jugador1 != null && jugador2 != null) {
+                    definirGanadorPartido(jugador1, jugador2);
+                }
+            }
+        } else {
+            System.out.println("\n\n _No se puede definir sets, sin jugadores_");
+        }
+        if (jugador1.getSet() == 3) {
+            return jugador1;
+        } else {
+            return jugador2;
+        }
     }
+
+    private static void definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
+        while (jugador1.getSet() < 3 && jugador2.getSet() < 3) {
+            definirGanadorSet(jugador1, jugador2);
+        }
+    }
+
+    private static void definirGanadorSet(Jugador jugador1, Jugador jugador2) {
+        Random random = new Random();
+
+        int resultado1 = random.nextInt(100) + 1;
+        int resultado2 = random.nextInt(100) + 1;
+
+        System.out.println("Partido: " + jugador1 + " vs " + jugador2);
+        System.out.println("Resultado: " + resultado1 + " - " + resultado2);
+
+        if (resultado1 > resultado2) {
+            jugador1.incrementarSet();
+            System.out.println("Ganador del set: " + jugador1);
+        } else if (resultado1 < resultado2) {
+            jugador2.incrementarSet();
+            System.out.println("Ganador del set: " + jugador2);
+        } else {
+            System.out.println("Empate");
+        }
+    }
+
 }

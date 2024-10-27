@@ -70,6 +70,12 @@ public class Jugador {
     public void setSet(int set) {
         this.set = set;
     }
+    
+    /*Método para incrementar set*/
+    public void incrementarSet(){
+        this.set++;
+    }
+    
     /*toString*/
     @Override
     public String toString() {
