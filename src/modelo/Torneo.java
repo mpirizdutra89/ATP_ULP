@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 
@@ -10,6 +11,8 @@ import java.util.Scanner;
 public class Torneo {
 
     private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
+    private static ArrayList<Jugador> partidos = new ArrayList<>();
+    private static int toltalJugadores = 0;
 
     public static void inscribirJugadorManual() {
         vaciarListaJugadores();
@@ -25,8 +28,8 @@ public class Torneo {
         jugadores = leerScannerEntero(leer.nextLine(), "Por defecto se cargo un torneo para 4 jugadores");// para
                                                                                                           // evitar
                                                                                                           // perdida
-                                                                                                         // de
-                                                                                                         // tiempo
+                                                                                                          // de
+                                                                                                          // tiempo
         if (jugadores != 4 && jugadores != 8 && jugadores != 16 && jugadores != 32 && jugadores != 64) {
             // leer.close();
             System.out.println("\n\n Nota:Cantidad de jugadores posibles 4-8-16-32-64. (se carga por default 4)\n\n");
@@ -62,6 +65,7 @@ public class Torneo {
                         "Deve ingresar un numero valido (que no exita en la lista de rankers),por defecto se le asigna el nr. 4");
                 insertado = listaJugadores.add(new Jugador(nombre, apellido, nacionalidad, ranking));
             }
+            toltalJugadores = listaJugadores.size();
 
         }
         System.out.println("\n\n Jugadores Ingresados Correctamente.");
@@ -75,16 +79,17 @@ public class Torneo {
     }
 
     public static void printListadoJugadoresActual() {
-        
-        if(listaJugadores.size()>0){
+
+        if (listaJugadores.size() > 0) {
             System.out.println("\n\n___Lista de jugadores del torneo___\n");
+            System.out.println("[Apellido, Ranking]\n");
             for (Jugador jugador : listaJugadores) {
                 System.out.println("[" + jugador + "]");
             }
-        }else{
+        } else {
             System.out.println("  [ LISTA  JUGADORES VACIA ]");
         }
-      
+
         System.out.println("\n");
     }
 
@@ -111,15 +116,67 @@ public class Torneo {
         listaJugadores.add(new Jugador("Holger", "Rune", "Dinamarca", 6));
         listaJugadores.add(new Jugador("Casper", "Ruud", "Noruega", 7));
         listaJugadores.add(new Jugador("Jannik", "Sinner", "Italia", 8));
-        listaJugadores.add(new Jugador("Taylor", "Fritz", "EE.UU.", 9));
-        listaJugadores.add(new Jugador("Frances", "Tiafoe", "EE.UU.", 10));
-        listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11));
-        listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12));
-        listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13));
-        listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14));
-        listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15));
-        listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16));
+        /*
+         * listaJugadores.add(new Jugador("Taylor", "Fritz", "EE.UU.", 9));
+         * listaJugadores.add(new Jugador("Frances", "Tiafoe", "EE.UU.", 10));
+         * listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11));
+         * listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12));
+         * listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13));
+         * listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14));
+         * listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15));
+         * listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16));
+         */
+        toltalJugadores = listaJugadores.size();
+        configurarTorneo();
+    }
 
+    /* Emparejamiento */
+
+    /*
+     * 
+     * for (int i = 0; i < n / 2; i++) {
+     * Jugador jugadorIzquierdo = jugadores[i]; // Jugadores top del ranking
+     * Jugador jugadorDerecho = jugadores[i + n / 2]; // Jugadores de la mitad
+     * inferior
+     * partidos.Add(new Nodo(jugadorIzquierdo, jugadorDerecho));
+     * }
+     */
+
+    private static void configurarTorneo() {
+        if (toltalJugadores > 0) {
+            Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0);
+            int niveles = calcularNiveles();
+            int maxNodos = (int) Math.pow(2, niveles + 1) - 1;
+
+            // System.out.println("Niveles:" + niveles + " max nodos posibles:" + maxNodos);
+            for (int i = 0; i < maxNodos; i++) {
+                partidos.add(jugador);
+            }
+
+        }
+    }
+
+    private static int calcularNiveles() {
+        int rondas = 0;
+        if (toltalJugadores > 0) {
+            rondas = (int) (Math.log(toltalJugadores) / Math.log(2));
+
+        }
+
+        return rondas;
+    }
+
+    public static void emparejar() {
+
+        if (toltalJugadores > 0) {
+
+            for (int i = 0; i < (toltalJugadores / 2); i++) {
+                
+            }
+
+        } else {
+            System.out.println("\n\n __No se puede emparejar, sin jugadores__");
+        }
     }
 
 }

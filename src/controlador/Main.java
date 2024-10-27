@@ -3,12 +3,12 @@ package controlador;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 /**
  * @author Ferrando Carlos
  */
 public class Main {
     static Scanner sc;;
+
     public static void main(String[] args) {
         menu();
     }
@@ -17,11 +17,10 @@ public class Main {
         sc = new Scanner(System.in);
         boolean salirMenuP = false;
         int opcionMenuP;
-        
 
         while (!salirMenuP) {
-           
-            System.out.println("**************************************************************");
+
+            System.out.println("\n\n**************************************************************");
             System.out.println("****************  BIENVENIDO AL MENU ATP ULP  ****************");
             System.out.println("****   ¿Que desea hacer?. Seleccione la opcion deseada:   ****");
             System.out.println("**************************************************************");
@@ -35,12 +34,12 @@ public class Main {
 
             try {
                 System.out.println("Escribe una de las opciones: ");
-              
-                 opcionMenuP=sc.nextInt();
+
+                opcionMenuP = sc.nextInt();
 
                 switch (opcionMenuP) {
                     case 1:
-                    limpiarConsola();
+                        limpiarConsola();
                         int opcionMenuS;
                         boolean salirMenuS = false;
                         while (!salirMenuS) {
@@ -53,7 +52,6 @@ public class Main {
                             try {
                                 System.out.println("Escribe una de las opciones: ");
                                 opcionMenuS = sc.nextInt();
-                                
 
                                 switch (opcionMenuS) {
                                     case 1:
@@ -61,15 +59,16 @@ public class Main {
                                         salirMenuS = true;
                                         break;
                                     case 2:
-                                        modelo.Torneo.inscribirJugadorDefecto();;
+                                        modelo.Torneo.inscribirJugadorDefecto();
+                                        ;
                                         salirMenuS = true;
                                         break;
                                     default:
                                         System.out.println("Solo numeros entre 1 y 2");
                                 }
                             } catch (InputMismatchException e) {
-                                salirMenuS=false;
-                                sc.nextLine();//para que vuelva a tomar el nextInt
+                                salirMenuS = false;
+                                sc.nextLine();// para que vuelva a tomar el nextInt
                                 System.out.println("Debes insertar un numero!!");
                             }
                         }
@@ -94,24 +93,23 @@ public class Main {
             } catch (InputMismatchException e) {
                 System.out.println("Debes insertar un numero!!");
             }
-            
-            
-         // sc.close();
+
+            // sc.close();
         }
-        
-       
+
     }
 
-    public static int leerScannerEntero(String numero){
+    public static int leerScannerEntero(String numero) {
         int opcion;
         try {
-             opcion = Integer.parseInt(numero); // Convierte el texto a número entero
-           
+            opcion = Integer.parseInt(numero); // Convierte el texto a número entero
+
         } catch (NumberFormatException e) {
-            opcion=4;
+            opcion = 4;
         }
         return opcion;
     }
+
     public static void limpiarConsola() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
