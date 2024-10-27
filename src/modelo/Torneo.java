@@ -72,7 +72,7 @@ public class Torneo {
         }
         System.out.println("\n\n Jugadores Ingresados Correctamente.");
         listaJugadores2 = new ArrayList<>(listaJugadores);
-        printListadoJugadoresActual();
+       
 
     }
 
