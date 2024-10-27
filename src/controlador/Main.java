@@ -37,7 +37,7 @@ public class Main {
             try {
                 System.out.println("Escribe una de las opciones: ");
 
-                opcionMenuP = sc.nextInt();
+                opcionMenuP = leerScannerEntero(sc.nextLine(), 3); // cambiado por error al escribir letras
 
                 switch (opcionMenuP) {
                     case 1:
@@ -112,6 +112,17 @@ public class Main {
 
         } catch (NumberFormatException e) {
             opcion = 4;
+        }
+        return opcion;
+    }
+
+    public static int leerScannerEntero(String numero, int op) {
+        int opcion;
+        try {
+            opcion = Integer.parseInt(numero); // Convierte el texto a número entero
+
+        } catch (NumberFormatException e) {
+            opcion = op;
         }
         return opcion;
     }
