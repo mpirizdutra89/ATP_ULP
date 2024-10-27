@@ -22,7 +22,7 @@ public class Main {
 
         while (!salirMenuP) {
 
-            System.out.println("\n\n**************************************************************");
+            System.out.println("**************************************************************");
             System.out.println("****************  BIENVENIDO AL MENU ATP ULP  ****************");
             System.out.println("****   ¿Que desea hacer?. Seleccione la opcion deseada:   ****");
             System.out.println("**************************************************************");

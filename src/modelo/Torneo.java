@@ -14,7 +14,10 @@ public class Torneo {
     private static ArrayList<Jugador> listaJugadores2;
     private static ArrayList<Jugador> partidos = new ArrayList<>();
     private static int toltalJugadores = 0;
-
+    
+    /*
+        Método para cargar una lista de jugadores Manualmente
+    */
     public static void inscribirJugadorManual() {
         vaciarListaJugadores();
         boolean insertado = false;
@@ -26,11 +29,8 @@ public class Torneo {
         Scanner leer = new Scanner(System.in);
 
         System.out.print("Ingrese la cantidad: ");
-        jugadores = leerScannerEntero(leer.nextLine(), "Por defecto se cargo un torneo para 4 jugadores");// para
-        // evitar
-        // perdida
-        // de
-        // tiempo
+        //Para evitar perdida de tiempo si el dato ingresado es erroneo se carga el minimo de jugadores
+        jugadores = leerScannerEntero(leer.nextLine(), "Por defecto se cargo un torneo para 4 jugadores");
         if (jugadores != 4 && jugadores != 8 && jugadores != 16 && jugadores != 32 && jugadores != 64) {
             // leer.close();
             System.out.println("\n\n Nota:Cantidad de jugadores posibles 4-8-16-32-64. (se carga por default 4)\n\n");
@@ -95,11 +95,10 @@ public class Torneo {
 
         System.out.println("\n");
     }
-
+    
     private static int leerScannerEntero(String numero, String msjError) {
         int opcion;
         try {
-
             opcion = Integer.parseInt(numero); // Convierte el texto a número entero
 
         } catch (NumberFormatException e) {
@@ -108,7 +107,9 @@ public class Torneo {
         }
         return opcion;
     }
-
+    /*
+        Método para cargar jugadores por defecto "rankig no actual"
+    */
     public static void inscribirJugadorDefecto() {
         vaciarListaJugadores();
         listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1, 0));
@@ -199,5 +200,9 @@ public class Torneo {
             System.out.println("\n\n __No se puede emparejar, sin jugadores__");
         }
     }
-
+    
+    
+    public static void definirSet( ArrayList<Jugador> listaPatidos){
+    
+    }
 }
