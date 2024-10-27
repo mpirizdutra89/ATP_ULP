@@ -5,8 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas
- *         2-3-4--5- array 7-16
+ * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
  */
 public class Torneo {
 
@@ -26,10 +25,10 @@ public class Torneo {
 
         System.out.print("Ingrese la cantidad: ");
         jugadores = leerScannerEntero(leer.nextLine(), "Por defecto se cargo un torneo para 4 jugadores");// para
-                                                                                                          // evitar
-                                                                                                          // perdida
-                                                                                                          // de
-                                                                                                          // tiempo
+        // evitar
+        // perdida
+        // de
+        // tiempo
         if (jugadores != 4 && jugadores != 8 && jugadores != 16 && jugadores != 32 && jugadores != 64) {
             // leer.close();
             System.out.println("\n\n Nota:Cantidad de jugadores posibles 4-8-16-32-64. (se carga por default 4)\n\n");
@@ -53,17 +52,18 @@ public class Torneo {
             String nacionalidad = leer.nextLine();
 
             System.out.print("Ranking: ");
-            int ranking = leerScannerEntero(leer.nextLine(), "\n__Deve ingresar un ranker valido y sin repetir.");
+            int ranking = leerScannerEntero(leer.nextLine(), "\n__Debe ingresar un ranker valido y sin repetir.");
+
+            int set = 0;
 
             // leer.nextLine();//limpiar buffer
-
             insertado = listaJugadores.add(new Jugador(nombre, apellido, nacionalidad, ranking));
             while (!insertado) {
                 printListadoJugadoresActual();
                 System.out.print("Ingrese ranking nuevamente para :(" + apellido + " " + nombre + "): ");
                 ranking = leerScannerEntero(leer.nextLine(),
-                        "Deve ingresar un numero valido (que no exita en la lista de rankers),por defecto se le asigna el nr. 4");
-                insertado = listaJugadores.add(new Jugador(nombre, apellido, nacionalidad, ranking));
+                        "Debe ingresar un numero valido (que no exita en la lista de rankers),por defecto se le asigna el nr. 4");
+                insertado = listaJugadores.add(new Jugador(nombre, apellido, nacionalidad, ranking, set));
             }
             toltalJugadores = listaJugadores.size();
 
@@ -108,23 +108,23 @@ public class Torneo {
 
     public static void inscribirJugadorDefecto() {
         vaciarListaJugadores();
-        listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1));
-        listaJugadores.add(new Jugador("Carlos", "Alcaraz", "España", 2));
-        listaJugadores.add(new Jugador("Daniil", "Medvedev", "Rusia", 3));
-        listaJugadores.add(new Jugador("Stefanos", "Tsitsipas", "Grecia", 4));
-        listaJugadores.add(new Jugador("Andrey", "Rublev", "Rusia", 5));
-        listaJugadores.add(new Jugador("Holger", "Rune", "Dinamarca", 6));
-        listaJugadores.add(new Jugador("Casper", "Ruud", "Noruega", 7));
-        listaJugadores.add(new Jugador("Jannik", "Sinner", "Italia", 8));
+        listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1, 0));
+        listaJugadores.add(new Jugador("Carlos", "Alcaraz", "España", 2, 0));
+        listaJugadores.add(new Jugador("Daniil", "Medvedev", "Rusia", 3, 0));
+        listaJugadores.add(new Jugador("Stefanos", "Tsitsipas", "Grecia", 4, 0));
+        listaJugadores.add(new Jugador("Andrey", "Rublev", "Rusia", 5, 0));
+        listaJugadores.add(new Jugador("Holger", "Rune", "Dinamarca", 6, 0));
+        listaJugadores.add(new Jugador("Casper", "Ruud", "Noruega", 7, 0));
+        listaJugadores.add(new Jugador("Jannik", "Sinner", "Italia", 8, 0));
         /*
-         * listaJugadores.add(new Jugador("Taylor", "Fritz", "EE.UU.", 9));
-         * listaJugadores.add(new Jugador("Frances", "Tiafoe", "EE.UU.", 10));
-         * listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11));
-         * listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12));
-         * listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13));
-         * listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14));
-         * listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15));
-         * listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16));
+         * listaJugadores.add(new Jugador("Taylor", "Fritz", "EE.UU.", 9,0));
+         * listaJugadores.add(new Jugador("Frances", "Tiafoe", "EE.UU.", 10,0));
+         * listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11,0));
+         * listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12,0));
+         * listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13,0));
+         * listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14,0));
+         * listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15,0));
+         * listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16,0));
          */
         toltalJugadores = listaJugadores.size();
         configurarTorneo();
@@ -132,7 +132,7 @@ public class Torneo {
 
     /* Emparejamiento */
 
-    /*
+ /*
      * 
      * for (int i = 0; i < n / 2; i++) {
      * Jugador jugadorIzquierdo = jugadores[i]; // Jugadores top del ranking
@@ -141,10 +141,9 @@ public class Torneo {
      * partidos.Add(new Nodo(jugadorIzquierdo, jugadorDerecho));
      * }
      */
-
     private static void configurarTorneo() {
         if (toltalJugadores > 0) {
-            Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0);
+            Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0,0);
             int niveles = calcularNiveles();
             int maxNodos = (int) Math.pow(2, niveles + 1) - 1;
 
@@ -171,7 +170,7 @@ public class Torneo {
         if (toltalJugadores > 0) {
 
             for (int i = 0; i < (toltalJugadores / 2); i++) {
-                
+
             }
 
         } else {
