@@ -202,7 +202,7 @@ public class Torneo {
     }
     
     
-    public static void definirSet( ArrayList<Jugador> listaPatidos){
+    public static void definirSet(){
     
     }
 }
