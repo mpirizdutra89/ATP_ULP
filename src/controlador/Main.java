@@ -76,7 +76,7 @@ public class Main {
                         }
 
                         break;
-                    case 2: // iniciar torne, carga partidos obejtos cavio y los empareja
+                    case 2: // iniciar torneo, carga partidos obejtos cavio y los empareja
                         limpiarConsola();
                         System.out.println("\n\n __Torneo iniciado__ ");
                         Torneo.configurarTorneo();

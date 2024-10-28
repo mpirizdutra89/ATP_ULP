@@ -199,33 +199,47 @@ public class Torneo {
             System.out.println("\n\n __No se puede emparejar, sin jugadores__");
         }
     }
+
     /*
         Definir Ganador Random
-    */
+     */
     public static void definirSets() {
         if (totalJugadores > 0) {
-            for (int i = 0; i < partidos.size(); i += 2) {
+            for (int i = 0; i < partidos.size() - 1; i += 2) {
                 Jugador jugador1 = partidos.get(i);
                 Jugador jugador2 = partidos.get(i + 1);
 
                 if (jugador1 != null && jugador2 != null) {
-                    definirGanadorPartido(jugador1, jugador2);
+                    Jugador ganador = definirGanadorPartido(jugador1, jugador2);
+                    partidos.set(i+2, ganador);
                 }
             }
         } else {
             System.out.println("\n\n _No se puede definir sets, sin jugadores_");
-        }     
+        }
+        
+        for (Jugador listaJugadore : partidos) {
+            System.out.println(listaJugadore);
+        }
     }
 
     private static Jugador definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
+        Jugador ganador;
         while (jugador1.getSet() < 3 && jugador2.getSet() < 3) {
             definirGanadorSet(jugador1, jugador2);
         }
         if (jugador1.getSet() == 3) {
-            return jugador1;
+            System.out.println("El ganador del partido es: " + jugador1);
+            ganador = jugador1;
         } else {
-            return jugador2;
+            System.out.println("El ganador del partido es: " + jugador2);
+            ganador = jugador2;
         }
+        //reiniciar sets
+        jugador1.resetSets();
+        jugador2.resetSets();
+
+        return ganador;
     }
 
     private static void definirGanadorSet(Jugador jugador1, Jugador jugador2) {
@@ -238,10 +252,10 @@ public class Torneo {
         System.out.println("Resultado: " + resultado1 + " - " + resultado2);
 
         if (resultado1 > resultado2) {
-            jugador1.incrementarSet();
+            jugador1.incrementarSets();
             System.out.println("Ganador del set: " + jugador1);
         } else if (resultado1 < resultado2) {
-            jugador2.incrementarSet();
+            jugador2.incrementarSets();
             System.out.println("Ganador del set: " + jugador2);
         } else {
             System.out.println("Empate");

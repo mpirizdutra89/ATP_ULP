@@ -71,11 +71,14 @@ public class Jugador {
         this.set = set;
     }
     
-    /*Método para incrementar set*/
-    public void incrementarSet(){
+    /*Método para incrementar set y resetear */
+    public void incrementarSets(){
         this.set++;
     }
     
+    public void resetSets(){
+        this.set = 0;
+    }
     /*toString*/
     @Override
     public String toString() {
