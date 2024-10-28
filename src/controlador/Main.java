@@ -32,7 +32,7 @@ public class Main {
             System.out.println("******   4 - Mostrar rondas                          *********");
             System.out.println("******   5 - Mostrar Estado del Cuadro               *********");
             System.out.println("******   6 - Salir                                   *********");
-            System.out.println("**************************************************************");
+            System.out.println("**************************************************************\n\n");
 
             try {
                 System.out.println("Escribe una de las opciones: ");
@@ -45,11 +45,11 @@ public class Main {
                         int opcionMenuS;
                         boolean salirMenuS = false;
                         while (!salirMenuS) {
-                            System.out.println("***************************");
+                            System.out.println("\n\n***************************");
                             System.out.println("*****   MENU CARGAR   *****");
                             System.out.println("*** 1 - Cargar Manual   ***");
                             System.out.println("*** 2 - Cargar Defecto  ***");
-                            System.out.println("***************************");
+                            System.out.println("***************************\n\n");
 
                             try {
                                 System.out.println("Escribe una de las opciones: ");

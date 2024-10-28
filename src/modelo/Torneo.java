@@ -6,8 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas
- *         2-3-4--5- array 7-16
+ * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
  */
 public class Torneo {
 
@@ -171,10 +170,7 @@ public class Torneo {
         while (niveles > 0) {
             ronda++;
             definirSets(ronda, (cantJugadores / ronda));
-            /*
-             * System.out.println("**********************************");
-             * System.out.println("**********************************");
-             */niveles--;
+            niveles--;
 
         }
     }
@@ -212,8 +208,8 @@ public class Torneo {
                 partidos.set(inicio + 1, listaJugadores2.get(i + (totalJugadores / 2)));
                 System.out.println(
                         "     __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
-                                + partidos.get(inicio + 1)
-                                + ")");
+                        + partidos.get(inicio + 1)
+                        + ")");
                 inicio += 2;
             }
 
@@ -228,6 +224,7 @@ public class Torneo {
     public static void definirSets(int ronda, int jugadores) {
         int indice = 0;
         int largoArray = (jugadores * 2) - 1;
+        Jugador ganadores[] = new Jugador[largoArray];
         if (totalJugadores > 0) {
 
             for (Jugador partido : partidos) {
@@ -245,7 +242,7 @@ public class Torneo {
                 Jugador jugador2 = partidos.get(i + 1);
 
                 Jugador ganador = definirGanadorPartido(jugador1, jugador2);
-
+                ganadores[i] = ganador;
                 partidos.set((i / 2), ganador);
 
             }
@@ -267,13 +264,17 @@ public class Torneo {
             cont++;
         }
         if (jugador1.getSet() == 3) {
-            System.out.println("\n[ El ganador del partido es: " + jugador1 + " ]");
+            System.out.println("\n*******************************************");
+            System.out.println("   El ganador del partido es: " + jugador1);
+            System.out.println("*******************************************\n");
             ganador = jugador1;
         } else {
-            System.out.println("[ El ganador del partido es: " + jugador2 + " ]");
+            System.out.println("\n*******************************************");
+            System.out.println("   El ganador del partido es: " + jugador2);
+            System.out.println("*******************************************\n");
             ganador = jugador2;
         }
-        System.out.println("*******************************************\n");
+       
         // reiniciar sets
         jugador1.resetSets();
         jugador2.resetSets();
@@ -287,9 +288,12 @@ public class Torneo {
         int resultado1 = random.nextInt(100) + 1;
         int resultado2 = random.nextInt(100) + 1;
         // Si esto es muy repetitivo lo sacamos
-        System.out.println("   \nPartido " + cont + ": " + jugador1 + " vs " + jugador2);
-        System.out.println("      |");
-        System.out.println("      |_Resultado: " + resultado1 + " - " + resultado2);
+        System.out.println("======================================");
+        System.out.println("SET " + cont + ": " + jugador1 + " vs " + jugador2);
+        System.out.println("--------------------------------------");
+        System.out.println("Resultado:");
+        System.out.println("   " + jugador1 + " " + resultado1 + " - " + resultado2 + " " + jugador2);
+        System.out.println("======================================");
 
         if (resultado1 > resultado2) {
             jugador1.incrementarSets();
