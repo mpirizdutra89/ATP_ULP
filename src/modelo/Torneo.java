@@ -228,7 +228,7 @@ public class Torneo {
                     break;
                 }
             }
-            //System.out.println(partidos.size());
+            
             System.out.println("*************** Ronda: " + ronda + "*******************");
             for (int i = indice; i < largoArray - 1; i += 2) {
                 System.out.println(largoArray);
@@ -244,10 +244,10 @@ public class Torneo {
             System.out.println("\n\n _No se puede definir sets, sin jugadores_");
         }
 
-        for (Jugador listaJugadore : partidos) {
-            System.out.print("[" + listaJugadore + "] ");
-        }
-        System.out.println("");
+//        for (Jugador listaJugadore : partidos) {
+//            System.out.print("[" + listaJugadore + "] ");
+//        }
+//        System.out.println("");lo hice para ver el arraylis borrar 
     }
 
     private static Jugador definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
@@ -274,16 +274,14 @@ public class Torneo {
 
         int resultado1 = random.nextInt(100) + 1;
         int resultado2 = random.nextInt(100) + 1;
-
+        //Si esto es muy repetitivo lo sacamos
         System.out.println("Partido: " + jugador1 + " vs " + jugador2);
         System.out.println("Resultado: " + resultado1 + " - " + resultado2);
 
         if (resultado1 > resultado2) {
             jugador1.incrementarSets();
-            //System.out.println("Ganador del set: " + jugador1);
         } else {
             jugador2.incrementarSets();
-            //System.out.println("Ganador del set: " + jugador2);
         }
     }
 
