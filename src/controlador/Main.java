@@ -22,7 +22,7 @@ public class Main {
 
         while (!salirMenuP) {
 
-            System.out.println("**************************************************************");
+            System.out.println("\n\n**************************************************************");
             System.out.println("****************  BIENVENIDO AL MENU ATP ULP  ****************");
             System.out.println("****   ¿Que desea hacer?. Seleccione la opcion deseada:   ****");
             System.out.println("**************************************************************");
@@ -77,7 +77,7 @@ public class Main {
 
                         break;
                     case 2: // iniciar torneo, carga partidos obejtos cavio y los empareja
-                        limpiarConsola();
+                        // limpiarConsola();
                         System.out.println("\n\n __Torneo iniciado__ ");
                         Torneo.configurarTorneo();
                         break;
@@ -88,7 +88,8 @@ public class Main {
                     case 4:
                         break;
                     case 5:
-
+                        // ya lo voy a cambiar era solo para ver el array
+                        modelo.Torneo.estadoPrueba();
                         break;
                     case 6:
                         salirMenuP = true;

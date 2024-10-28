@@ -12,7 +12,8 @@ public class Jugador {
     private String nacionalidad;
     private int ranking;
     private int set;
-    /*CONSTRUCTORES*/
+
+    /* CONSTRUCTORES */
     public Jugador() {
     }
 
@@ -22,14 +23,15 @@ public class Jugador {
         this.nacionalidad = nacionalidad;
         this.ranking = ranking;
     }
-    public Jugador(String nombre, String apellido, String nacionalidad, int ranking,int set) {
+
+    public Jugador(String nombre, String apellido, String nacionalidad, int ranking, int set) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nacionalidad = nacionalidad;
         this.ranking = ranking;
         this.set = set;
     }
-    /*GETTERS & SETTERS*/
+    /* GETTERS & SETTERS */
 
     public String getNombre() {
         return nombre;
@@ -70,25 +72,28 @@ public class Jugador {
     public void setSet(int set) {
         this.set = set;
     }
-    
-    /*Método para incrementar set y resetear */
-    public void incrementarSets(){
+
+    /* Método para incrementar set y resetear */
+    public void incrementarSets() {
         this.set++;
     }
-    
-    public void resetSets(){
+
+    public void resetSets() {
         this.set = 0;
     }
-    /*toString*/
+
+    /* toString */
     @Override
     public String toString() {
-        return apellido + ", " + ranking;
+        return apellido + " (R-" + ranking + ")";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Jugador jugador = (Jugador) o;
         return ranking == jugador.ranking; // Comparar solo por ranking
     }
@@ -97,7 +102,7 @@ public class Jugador {
     public int hashCode() {
         return Objects.hash(ranking); // Hash solo por ranking
     }
-    
-    //TODO
-    //método carga "Interface"
+
+    // TODO
+    // método carga "Interface"
 }
