@@ -138,7 +138,9 @@ public class Torneo {
 
     }
 
-    /* Emparejamiento */
+    /* 
+        Emparejamiento e inicio de torneo 
+    */
     public static void configurarTorneo() {
         if (totalJugadores > 0) {
             Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0, 0);
@@ -151,12 +153,12 @@ public class Torneo {
             }
 
             emparejar();
-            jugarRonda();
+            jugarRondas();
             
         }
     }
     
-    private static void jugarRonda(){
+    private static void jugarRondas(){
         int ronda = 0;
         int cantJugadores = totalJugadores;
         int niveles = calcularNiveles();
