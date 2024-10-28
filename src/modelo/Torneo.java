@@ -142,7 +142,7 @@ public class Torneo {
     public static void configurarTorneo() {
         if (totalJugadores > 0) {
             Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0, 0);
-            int niveles = calcularNivele();
+            int niveles = calcularNiveles();
             int maxNodos = (int) Math.pow(2, niveles + 1) - 1;
 
             // System.out.println("Niveles:" + niveles + " max nodos posibles:" + maxNodos);
@@ -151,11 +151,26 @@ public class Torneo {
             }
 
             emparejar();
-            definirSets();
+            jugarRonda();
+            
         }
     }
+    
+    private static void jugarRonda(){
+        int ronda = 0;
+        int cantJugadores = totalJugadores;
+        int niveles = calcularNiveles();
+            while (niveles > 0) {
+                ronda++;
+                definirSets(ronda, (cantJugadores/ronda));
+                System.out.println("**********************************");
+                System.out.println("**********************************");
+                niveles--;
+                
+            }
+    }
 
-    private static int calcularNivele() {
+    private static int calcularNiveles() {
         int rondas = 0;
         if (totalJugadores > 0) {
             rondas = (int) (Math.log(totalJugadores) / Math.log(2));
@@ -164,7 +179,7 @@ public class Torneo {
     }
 
     private static int[] indiceNivelesArbol() {
-        int indiceInicio[] = new int[calcularNivele() + 1];
+        int indiceInicio[] = new int[calcularNiveles() + 1];
         int nivel = 0;
         while (Math.pow(2, nivel) - 1 < totalJugadores) {
             indiceInicio[nivel] = (int) Math.pow(2, nivel) - 1;
@@ -201,31 +216,36 @@ public class Torneo {
     /*
         Definir Ganador Random
      */
-    public static void definirSets() {
+    public static void definirSets(int ronda, int jugadores) {
         int indice = 0;
-       
+        int largoArray = (jugadores*2)-1;
         if (totalJugadores > 0) {
+            
             for (Jugador partido : partidos) {
                 if (partido.getApellido().equals("apellido")) {
                     indice++;
+                } else {
+                    break;
                 }
             }
-            
-            for (int i = indice; i < partidos.size() - 1; i += 2) {
+            //System.out.println(partidos.size());
+            System.out.println("*************** Ronda: " + ronda + "*******************");
+            for (int i = indice; i < largoArray - 1; i += 2) {
+                System.out.println(largoArray);
                 Jugador jugador1 = partidos.get(i);
                 Jugador jugador2 = partidos.get(i + 1);
 
                 Jugador ganador = definirGanadorPartido(jugador1, jugador2);
-                
-                partidos.set(( i/ 2), ganador);
-                
+                System.out.println("***********************************************");
+                partidos.set((i / 2), ganador);
+
             }
         } else {
             System.out.println("\n\n _No se puede definir sets, sin jugadores_");
         }
-        
+
         for (Jugador listaJugadore : partidos) {
-            System.out.print("["+listaJugadore+"] ");
+            System.out.print("[" + listaJugadore + "] ");
         }
         System.out.println("");
     }
