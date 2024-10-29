@@ -9,7 +9,10 @@ import modelo.Torneo;
  * @author Ferrando Carlos
  */
 public class Main {
-    static Scanner sc;;
+
+    static Scanner sc;
+
+    ;
 
     public static void main(String[] args) {
         menu();
@@ -49,9 +52,15 @@ public class Main {
                             System.out.println("*****   MENU CARGAR   *****");
                             System.out.println("*** 1 - Cargar Manual   ***");
                             System.out.println("*** 2 - Cargar Defecto  ***");
+                            System.out.println("*** 3 - Volver al Menu  ***");
                             System.out.println("***************************\n\n");
 
                             try {
+                                if (Torneo.totalJugadores > 0) {
+                                    System.out.println("==============================================================================");
+                                    System.out.println("\tLista del torneo tiene Jugadores. Cantidad actual: "+Torneo.totalJugadores);
+                                    System.out.println("==============================================================================\n");
+                                }
                                 System.out.println("Escribe una de las opciones: ");
                                 opcionMenuS = sc.nextInt();
 
@@ -62,7 +71,9 @@ public class Main {
                                         break;
                                     case 2:
                                         modelo.Torneo.inscribirJugadorDefecto();
-                                        ;
+                                        salirMenuS = true;
+                                        break;
+                                    case 3:
                                         salirMenuS = true;
                                         break;
                                     default:

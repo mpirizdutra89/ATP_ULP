@@ -13,7 +13,7 @@ public class Torneo {
     private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
     private static ArrayList<Jugador> listaJugadores2;
     private static ArrayList<Jugador> partidos = new ArrayList<>();
-    private static int totalJugadores = 0;
+    public static int totalJugadores = 0;
 
     /*
      * Método para cargar una lista de jugadores Manualmente
