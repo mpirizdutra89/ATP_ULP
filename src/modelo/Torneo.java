@@ -151,7 +151,7 @@ public class Torneo {
             emparejar();
             System.out.println("\n\n\n*************** [__Inicia el juego__] ***************\n");
 
-            // jugarRondas();
+            jugarRondas();
 
         }
     }
