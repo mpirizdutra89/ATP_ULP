@@ -12,7 +12,7 @@ public class Torneo {
 
     private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
     private static ArrayList<Jugador> listaJugadores2;
-    private static ArrayList<Jugador> partidos = new ArrayList<>();
+   // private static ArrayList<Jugador> partidos = new ArrayList<>();
     public static int totalJugadores = 0;
     private static ArbolTorneo arbol;
 
@@ -191,7 +191,9 @@ public class Torneo {
     public static void emparejar() {
 
         if (totalJugadores > 0) {
-            System.out.println("\n  __Emparejar jugadores__\n");
+            System.out.println("\n*******************************");
+            System.out.println("\tEmparejar jugadores");
+            System.out.println("*******************************\n");
             int indices[] = indiceNivelesArbol();
             int inicio = indices[indices.length - 1];
 
@@ -201,6 +203,7 @@ public class Torneo {
                 inicio += 2;
                
             }
+            arbol.mostrarNiveles(indices[indices.length-1]);
 
         } else {
             System.out.println("\n\n __No se puede emparejar, sin jugadores__");
@@ -213,36 +216,28 @@ public class Torneo {
     public static void definirSets(int ronda, int jugadores) {
         int indice = 0;
         int largoArray = (jugadores * 2) - 1;
-        Jugador ganadores[] = new Jugador[largoArray];
+        //Jugador ganadores[] = new Jugador[largoArray];
         if (totalJugadores > 0) {
 
-            for (Jugador partido : partidos) {
-                if (partido.getApellido().equals("apellido")) {
-                    indice++;
-                } else {
-                    break;
-                }
-            }
+            indice=arbol.jugadoresVacios();
+
             System.out.println("\n\n*************** [Ronda: " + ronda + "]*******************");
 
             for (int i = indice; i < largoArray - 1; i += 2) {
                 // System.out.println(largoArray);
-                Jugador jugador1 = partidos.get(i);
-                Jugador jugador2 = partidos.get(i + 1);
+                Jugador jugador1 = arbol.verJugador(i);
+                Jugador jugador2 = arbol.verJugador(i+1);
 
                 Jugador ganador = definirGanadorPartido(jugador1, jugador2);
-                ganadores[i] = ganador;
-                partidos.set((i / 2), ganador);
+                //ganadores[i] = ganador;
+                //partidos.set((i / 2), ganador);
+                arbol.ingresarGanador((i/2),ganador);
 
             }
         } else {
             System.out.println("\n\n _No se puede definir sets, sin jugadores_");
         }
 
-        // for (Jugador listaJugadore : partidos) {
-        // System.out.print("[" + listaJugadore + "] ");
-        // }
-        // System.out.println("");lo hice para ver el arraylis borrar
     }
 
     private static Jugador definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
@@ -293,9 +288,9 @@ public class Torneo {
     }
 
     public static void estadoPrueba() {
-        for (Jugador jugador : partidos) {
-            System.out.print(jugador + ",");
-        }
+        // for (Jugador jugador : partidos) {
+        //     System.out.print(jugador + ",");
+        // }
     }
 
 }
