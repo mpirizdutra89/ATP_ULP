@@ -141,6 +141,7 @@ public class Torneo {
 
     /*
      * Emparejamiento e inicio de torneo
+        Se implementa Arbol
      */
     public static void configurarTorneo() {
         if (totalJugadores > 0) {
