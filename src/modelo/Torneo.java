@@ -207,10 +207,10 @@ public class Torneo {
                 partidos.set(inicio, listaJugadores2.get(i));
 
                 partidos.set(inicio + 1, listaJugadores2.get(i + (totalJugadores / 2)));
-                System.out.println(
-                        "     __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
-                        + partidos.get(inicio + 1)
-                        + ")");
+                // System.out.println(
+                //         "     __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
+                //         + partidos.get(inicio + 1)
+                //         + ")");
                 inicio += 2;
             }
 
