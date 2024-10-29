@@ -14,6 +14,7 @@ public class Torneo {
     private static ArrayList<Jugador> listaJugadores2;
     private static ArrayList<Jugador> partidos = new ArrayList<>();
     public static int totalJugadores = 0;
+    private static ArbolTorneo arbol;
 
     /*
      * Método para cargar una lista de jugadores Manualmente
@@ -24,7 +25,7 @@ public class Torneo {
 
         System.out.println("\n\n ___Inscripcion de jugadores___\n");
         System.out.println("Nota: Cantidad de jugadores posibles 4-8-16-32-64.");
-        String ranker = "";
+        //String ranker = "";
         int jugadores;
         Scanner leer = new Scanner(System.in);
 
@@ -145,20 +146,12 @@ public class Torneo {
      */
     public static void configurarTorneo() {
         if (totalJugadores > 0) {
-            Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0, 0);
-            int niveles = calcularNiveles();
-            int maxNodos = (int) Math.pow(2, niveles + 1) - 1;
-
-            // System.out.println("Niveles:" + niveles + " max nodos posibles:" + maxNodos);
-            for (int i = 0; i < maxNodos; i++) {
-                partidos.add(jugador);// jugadores vacios
-            }
-
+            
+            arbol=new ArbolTorneo(totalJugadores);
             emparejar();
-
             System.out.println("\n\n\n*************** [__Inicia el juego__] ***************\n");
 
-            jugarRondas();
+            // jugarRondas();
 
         }
     }
@@ -203,15 +196,10 @@ public class Torneo {
             int inicio = indices[indices.length - 1];
 
             for (int i = 0; i < (totalJugadores / 2); i++) {
-
-                partidos.set(inicio, listaJugadores2.get(i));
-
-                partidos.set(inicio + 1, listaJugadores2.get(i + (totalJugadores / 2)));
-                // System.out.println(
-                //         "     __Partido nr." + (i + 1) + ":  (" + partidos.get(inicio) + ") & ("
-                //         + partidos.get(inicio + 1)
-                //         + ")");
+                
+                arbol.ingresarJugadores(inicio, listaJugadores2.get(i),listaJugadores2.get(i + (totalJugadores / 2)));
                 inicio += 2;
+               
             }
 
         } else {
