@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import modelo.Torneo;
+import modelo.ArbolTorneo;
 
 /**
  * @author Ferrando Carlos
@@ -33,7 +34,7 @@ public class Main {
             System.out.println("******   2 - Iniciar Torneo                          *********");
             System.out.println("******   3 - Lista Jugadores                         *********");
             System.out.println("******   4 - Mostrar rondas                          *********");
-            System.out.println("******   5 - Mostrar Estado del Cuadro               *********");
+            System.out.println("******   5 - Mostrar Arbol del Torneo                *********");
             System.out.println("******   6 - Salir                                   *********");
             System.out.println("**************************************************************\n\n");
 
@@ -100,7 +101,8 @@ public class Main {
                         break;
                     case 5:
                         // ya lo voy a cambiar era solo para ver el array
-                        modelo.Torneo.estadoPrueba();
+                        //modelo.Torneo.estadoPrueba();
+                        modelo.Torneo.imprimirTorneo();
                         break;
                     case 6:
                         salirMenuP = true;

@@ -253,7 +253,7 @@ public class Torneo {
             System.out.println("*******************************************\n");
             ganador = jugador1;
         } else {
-            System.out.println("\n*******************************************");
+            System.out.println("1*******************************************");
             System.out.println("   El ganador del partido es: " + jugador2);
             System.out.println("*******************************************\n");
             ganador = jugador2;
@@ -272,12 +272,12 @@ public class Torneo {
         int resultado1 = random.nextInt(100) + 1;
         int resultado2 = random.nextInt(100) + 1;
         // Si esto es muy repetitivo lo sacamos
-        System.out.println("======================================");
+        System.out.println("=================================================");
         System.out.println("SET " + cont + ": " + jugador1 + " vs " + jugador2);
-        System.out.println("--------------------------------------");
+        System.out.println("-------------------------------------------------");
         System.out.println("Resultado:");
         System.out.println("   " + jugador1 + " " + resultado1 + " - " + resultado2 + " " + jugador2);
-        System.out.println("======================================");
+        System.out.println("==================================================");
 
         if (resultado1 > resultado2) {
             jugador1.incrementarSets();
@@ -286,6 +286,11 @@ public class Torneo {
         }
 
     }
+    
+    public static void imprimirTorneo() {
+        arbol.cargaPostOrden();
+    }
+
 
     public static void estadoPrueba() {
         // for (Jugador jugador : partidos) {
