@@ -98,10 +98,20 @@ public class Main {
                         modelo.Torneo.printListadoJugadoresActual();
                         break;
                     case 4:
-                        break;
+                  //  int niveles[]=Torneo.indiceNivelesArbol();
+
+                         System.out.println("*************** [Mostrar rondas del juego ] *******************");
+                         System.out.println("\t Rondas disponibles :");
+                         Torneo.rondasDisponibles();
+                         System.out.print("\n\tSeleccione una: ");
+                         int opcion=leerScannerEntero(sc.nextLine());
+                         Torneo.mostrarRondas(opcion);
+                        
+
+                        
+                    break;
                     case 5:
-                        // ya lo voy a cambiar era solo para ver el array
-                        //modelo.Torneo.estadoPrueba();
+                        
                         modelo.Torneo.imprimirTorneo();
                         break;
                     case 6:

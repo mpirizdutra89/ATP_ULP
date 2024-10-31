@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,7 +13,8 @@ public class Torneo {
 
     private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
     private static ArrayList<Jugador> listaJugadores2;
-   // private static ArrayList<Jugador> partidos = new ArrayList<>();
+    private static HashMap<Integer, Integer> rondas = new HashMap<>();
+    private static  ArrayList<Integer> accederRonda;
     public static int totalJugadores = 0;
     private static ArbolTorneo arbol;
 
@@ -34,7 +36,7 @@ public class Torneo {
         // minimo de jugadores
         jugadores = leerScannerEntero(leer.nextLine(), "Por defecto se cargo un torneo para 4 jugadores");
         if (jugadores != 4 && jugadores != 8 && jugadores != 16 && jugadores != 32 && jugadores != 64) {
-            // leer.close();
+            
             System.out.println("\n\n Nota:Cantidad de jugadores posibles 4-8-16-32-64. (se carga por default 4)\n\n");
             jugadores = 4;
         } else {
@@ -152,6 +154,7 @@ public class Torneo {
             System.out.println("\n\n\n*************** [__Inicia el juego__] ***************\n");
 
             jugarRondas();
+            anexarRondas();
 
         }
     }
@@ -188,6 +191,63 @@ public class Torneo {
         return indiceInicio;
     }
 
+    public static void mostarNiveles(){
+        int[] nivel=indiceNivelesArbol();
+        for (int i : nivel) {
+            System.out.println(i);
+        }
+    }
+
+    public static void anexarRondas(){
+        int niveles[]=indiceNivelesArbol();
+       int j=1;
+        for (int i = niveles.length; i > 0; i--) {
+            rondas.put((j), niveles[i-1]);
+           
+            j++;
+        }
+      
+    }
+
+    public static void mostrarRondas(int nivel){
+        arbol.mostrarNiveles(navegar(nivel)); //nivel que le paso esta mal el usuario pone 1,2,3,4 pero tengo que buscarlo rondas y que me de el nivel de larray de niveles
+        //System.out.println("\n\t__Resultados de la fase "+nivel+": ");
+      //  System.out.println("siguie al nivel actual:"+nivel+" siguiete: "+navegar(nivelSiguiente(nivel)));
+    }
+    //arbol.mostrarNiveles(nivelSiguiente(nivel));
+
+    private static int nivelSiguiente(int nivel){
+        int siguiente=-1;
+        for (int niveles : rondas.keySet()) {
+          if((nivel+1)==niveles){
+            siguiente=rondas.get(niveles);
+          }
+        }
+        if(siguiente==-1){
+            System.out.println(" No exite nivel ni resultado para la ronda: "+nivel);
+        }
+
+        return siguiente;
+    }
+
+    public static void rondasDisponibles(){
+      int i=0;
+      System.out.print("\t\t(");
+        for (int ronda : rondas.keySet()) {
+
+            if(i==rondas.size()-1){
+                System.out.print(ronda+" )");
+
+            }else{
+
+                System.out.print(ronda+", ");
+            }
+            i++;
+           
+        }
+
+        
+    }
     public static void emparejar() {
 
         if (totalJugadores > 0) {
@@ -203,13 +263,32 @@ public class Torneo {
                 inicio += 2;
                
             }
-            arbol.mostrarNiveles(indices[indices.length-1]);
+            
+            arbol.mostrarNiveles(navegar(indices.length-1));
 
         } else {
             System.out.println("\n\n __No se puede emparejar, sin jugadores__");
         }
     }
 
+    private static int[] navegar(int indice){
+        int niveles[]=indiceNivelesArbol();
+        int[] nav=new int[2];
+
+            for (int i = 0; i < niveles.length; i++) {
+                if(indice==niveles[i]){
+                    if(indice!=niveles[niveles.length-1]){
+                        nav[0]=indice;
+                        nav[1]=niveles[i+1];//fin
+                    }else{
+                        nav[0]=indice;
+                        nav[1]=-1;
+                    }
+                }
+            }
+
+        return nav;
+    }
     /*
      * Definir Ganador Random
      */
@@ -253,7 +332,7 @@ public class Torneo {
             System.out.println("*******************************************\n");
             ganador = jugador1;
         } else {
-            System.out.println("1*******************************************");
+            System.out.println("*******************************************");
             System.out.println("   El ganador del partido es: " + jugador2);
             System.out.println("*******************************************\n");
             ganador = jugador2;
@@ -292,10 +371,6 @@ public class Torneo {
     }
 
 
-    public static void estadoPrueba() {
-        // for (Jugador jugador : partidos) {
-        //     System.out.print(jugador + ",");
-        // }
-    }
+  
 
 }

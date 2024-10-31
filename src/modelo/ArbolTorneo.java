@@ -36,19 +36,23 @@ public class ArbolTorneo {
 
     }
 
-    public void mostrarNiveles(int nivel) {
+    public void mostrarNiveles(int[] nav) {
         int cant = 1;
+        if(nav[1]==-1){
+            nav[1]=partidos.size();
+        }
         if (this.totalJugadores > 0) {//sin jugadores no hay nada, no tiene que ver con los partidos a nivel de recorridos
-            for (int i = nivel; i < partidos.size();) {
+            for (int i = nav[0]; i <= nav[1];) {
                 //mostrar las parejas
-                System.out.println(
-                        "     __Partido nr." + cant + ":  [" + partidos.get(i) + "] & ["
+                System.out.print(
+                        "__Partido nr." + cant + ":  [" + partidos.get(i) + "] & ["
                         + partidos.get(i + 1)
-                        + "]");
+                        + "]   ");
                 cant++;
                 i = i + 2;
             }
         }
+        System.out.println("\n\n");
 
     }
 
