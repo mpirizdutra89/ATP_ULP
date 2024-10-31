@@ -253,7 +253,7 @@ public class Torneo {
             System.out.println("*******************************************\n");
             ganador = jugador1;
         } else {
-            System.out.println("1*******************************************");
+            System.out.println("*******************************************");
             System.out.println("   El ganador del partido es: " + jugador2);
             System.out.println("*******************************************\n");
             ganador = jugador2;

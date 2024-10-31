@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class ArbolTorneo {
 
     private ArrayList<Jugador> partidos;
+    private ArrayList<Jugador> imprimirPartidos;
     private int totalJugadores;
 
     public ArbolTorneo(int totalJugadores) {
@@ -69,11 +70,17 @@ public class ArbolTorneo {
     }
 
     public void cargaPostOrden() {
-        postOrden(0);
+        int niveles = (int) (Math.log(totalJugadores) / Math.log(2));
+        while (niveles > 0) {
+            postOrden(0);
+            niveles --;
+        }
+
     }
 
     private void postOrden(int posicion) {
-        if (posicion >= partidos.size() || partidos.get(posicion) == null) {
+        imprimirPartidos = (ArrayList<Jugador>) partidos.clone();
+        if (posicion >= imprimirPartidos.size() || imprimirPartidos.get(posicion) == null) {
             return;
         }
         //Recorrer hijo izq
@@ -81,15 +88,30 @@ public class ArbolTorneo {
         //Recorrer hijo der
         postOrden(2 * posicion + 2);
         //Visita nodo actual " AL iniciar nodo raíz"
+        // System.out.print("[" + partidos.get(posicion) + "]");
         if (esHoja(posicion)) {
-            System.out.print("[" + partidos.get(posicion) + "]");
+            System.out.print("\n[" + imprimirPartidos.get(posicion) + "]");
+            if (!imprimirPartidos.get(posicion).getNombre().equalsIgnoreCase("")) {
+                borrarHoja(posicion);
+            }
         }
         System.out.println("");
     }
 
     private boolean esHoja(int posicion) {
-        return (2 * posicion + 1 >= partidos.size() || partidos.get(2 * posicion + 1) == null)
-                && (2 * posicion + 2 >= partidos.size() || partidos.get(2 * posicion + 2) == null);
+        return (2 * posicion + 1 >= imprimirPartidos.size() || imprimirPartidos.get(2 * posicion + 1) == null)
+                && (2 * posicion + 2 >= imprimirPartidos.size() || imprimirPartidos.get(2 * posicion + 2) == null);
 
+    }
+
+    private void borrarHoja(int posicion) {
+        Jugador jugador = new Jugador("", "", "", 0, 0);
+        if (posicion >= imprimirPartidos.size() || imprimirPartidos.get(posicion) == null) {
+            return;
+        }
+
+        if (esHoja(posicion)) {
+            imprimirPartidos.set(posicion, jugador);//borro elemento hoja
+        }
     }
 }
