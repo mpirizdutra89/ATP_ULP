@@ -150,11 +150,12 @@ public class Torneo {
         if (totalJugadores > 0) {
             
             arbol=new ArbolTorneo(totalJugadores);
+            anexarRondas();
             emparejar();
             System.out.println("\n\n\n*************** [__Inicia el juego__] ***************\n");
 
             jugarRondas();
-            anexarRondas();
+           
 
         }
     }
@@ -200,17 +201,25 @@ public class Torneo {
 
     public static void anexarRondas(){
         int niveles[]=indiceNivelesArbol();
+     
+       
        int j=1;
         for (int i = niveles.length; i > 0; i--) {
             rondas.put((j), niveles[i-1]);
            
             j++;
         }
+
+        // for (Integer clave : rondas.keySet()) {
+        //     Integer valor = rondas.get(clave);
+        //     System.out.println("Clave: " + clave + ", Valor: " + valor);
+        // }
       
     }
 
     public static void mostrarRondas(int nivel){
-        arbol.mostrarNiveles(navegar(nivel)); //nivel que le paso esta mal el usuario pone 1,2,3,4 pero tengo que buscarlo rondas y que me de el nivel de larray de niveles
+       
+       arbol.mostrarNiveles(navegar(nivel)); //nivel que le paso esta mal el usuario pone 1,2,3,4 pero tengo que buscarlo rondas y que me de el nivel de larray de niveles
         //System.out.println("\n\t__Resultados de la fase "+nivel+": ");
       //  System.out.println("siguie al nivel actual:"+nivel+" siguiete: "+navegar(nivelSiguiente(nivel)));
     }
@@ -248,6 +257,7 @@ public class Torneo {
 
         
     }
+
     public static void emparejar() {
 
         if (totalJugadores > 0) {
@@ -264,14 +274,21 @@ public class Torneo {
                
             }
             
-            arbol.mostrarNiveles(navegar(indices.length-1));
+            arbol.mostrarNiveles(navegar(1));
 
         } else {
             System.out.println("\n\n __No se puede emparejar, sin jugadores__");
         }
     }
 
-    private static int[] navegar(int indice){
+    private static int[] navegar(int nivelUsuario){
+
+    
+        Integer indice=1;
+        if( nivelUsuario>0 && nivelUsuario < 5 ){
+            indice=rondas.get(nivelUsuario);
+        }
+     
         int niveles[]=indiceNivelesArbol();
         int[] nav=new int[2];
 

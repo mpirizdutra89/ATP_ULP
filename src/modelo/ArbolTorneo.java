@@ -40,8 +40,9 @@ public class ArbolTorneo {
     public void mostrarNiveles(int[] nav) {
         int cant = 1;
         if(nav[1]==-1){
-            nav[1]=partidos.size();
+            nav[1]=partidos.size()-1;
         }
+     
         if (this.totalJugadores > 0) {//sin jugadores no hay nada, no tiene que ver con los partidos a nivel de recorridos
             for (int i = nav[0]; i <= nav[1];) {
                 //mostrar las parejas
