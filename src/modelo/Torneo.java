@@ -7,14 +7,16 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
+ * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas
+ *         2-3-4--5- array 7-16
  */
 public class Torneo {
 
     private static LinkedHashSet<Jugador> listaJugadores = new LinkedHashSet<>();
     private static ArrayList<Jugador> listaJugadores2;
     private static HashMap<Integer, Integer> rondas = new HashMap<>();
-    private static  ArrayList<Integer> accederRonda;
+    private static Integer ganadorPos;
+    private static ArrayList<Integer> accederRonda;
     public static int totalJugadores = 0;
     private static ArbolTorneo arbol;
 
@@ -27,7 +29,7 @@ public class Torneo {
 
         System.out.println("\n\n ___Inscripcion de jugadores___\n");
         System.out.println("Nota: Cantidad de jugadores posibles 4-8-16-32-64.");
-        //String ranker = "";
+        // String ranker = "";
         int jugadores;
         Scanner leer = new Scanner(System.in);
 
@@ -36,7 +38,7 @@ public class Torneo {
         // minimo de jugadores
         jugadores = leerScannerEntero(leer.nextLine(), "Por defecto se cargo un torneo para 4 jugadores");
         if (jugadores != 4 && jugadores != 8 && jugadores != 16 && jugadores != 32 && jugadores != 64) {
-            
+
             System.out.println("\n\n Nota:Cantidad de jugadores posibles 4-8-16-32-64. (se carga por default 4)\n\n");
             jugadores = 4;
         } else {
@@ -124,16 +126,16 @@ public class Torneo {
         listaJugadores.add(new Jugador("Holger", "Rune", "Dinamarca", 6, 0));
         listaJugadores.add(new Jugador("Casper", "Ruud", "Noruega", 7, 0));
         listaJugadores.add(new Jugador("Jannik", "Sinner", "Italia", 8, 0));
-        /*
-         * listaJugadores.add(new Jugador("Taylor", "Fritz", "EE.UU.", 9,0));
-         * listaJugadores.add(new Jugador("Frances", "Tiafoe", "EE.UU.", 10,0));
-         * listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11,0));
-         * listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12,0));
-         * listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13,0));
-         * listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14,0));
-         * listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15,0));
-         * listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16,0));
-         */
+
+        // listaJugadores.add(new Jugador("Taylor", "Fritz", "EE.UU.", 9, 0));
+        // listaJugadores.add(new Jugador("Frances", "Tiafoe", "EE.UU.", 10, 0));
+        // listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11, 0));
+        // listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12, 0));
+        // listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13, 0));
+        // listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14, 0));
+        // listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15, 0));
+        // listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16, 0));
+
         totalJugadores = listaJugadores.size();
         // para poder ingresar a posiciones espesificas lo pasamos a
         // una arrayList
@@ -144,18 +146,17 @@ public class Torneo {
 
     /*
      * Emparejamiento e inicio de torneo
-        Se implementa Arbol
+     * Se implementa Arbol
      */
     public static void configurarTorneo() {
         if (totalJugadores > 0) {
-            
-            arbol=new ArbolTorneo(totalJugadores);
+
+            arbol = new ArbolTorneo(totalJugadores);
             anexarRondas();
             emparejar();
             System.out.println("\n\n\n*************** [__Inicia el juego__] ***************\n");
 
             jugarRondas();
-           
 
         }
     }
@@ -192,70 +193,76 @@ public class Torneo {
         return indiceInicio;
     }
 
-    public static void mostarNiveles(){
-        int[] nivel=indiceNivelesArbol();
+    public static void mostarNiveles() {
+        int[] nivel = indiceNivelesArbol();
         for (int i : nivel) {
             System.out.println(i);
         }
     }
 
-    public static void anexarRondas(){
-        int niveles[]=indiceNivelesArbol();
-     
-       
-       int j=1;
+    public static void anexarRondas() {
+        int niveles[] = indiceNivelesArbol();
+
+        int j = 1;
         for (int i = niveles.length; i > 0; i--) {
-            rondas.put((j), niveles[i-1]);
-           
+            rondas.put((j), niveles[i - 1]);
+            ganadorPos = j;
             j++;
         }
 
         // for (Integer clave : rondas.keySet()) {
-        //     Integer valor = rondas.get(clave);
-        //     System.out.println("Clave: " + clave + ", Valor: " + valor);
+        // Integer valor = rondas.get(clave);
+        // System.out.println("Clave: " + clave + ", Valor: " + valor);
         // }
-      
+
     }
 
-    public static void mostrarRondas(int nivel){
-       
-       arbol.mostrarNiveles(navegar(nivel)); //nivel que le paso esta mal el usuario pone 1,2,3,4 pero tengo que buscarlo rondas y que me de el nivel de larray de niveles
-        //System.out.println("\n\t__Resultados de la fase "+nivel+": ");
-      //  System.out.println("siguie al nivel actual:"+nivel+" siguiete: "+navegar(nivelSiguiente(nivel)));
-    }
-    //arbol.mostrarNiveles(nivelSiguiente(nivel));
-
-    private static int nivelSiguiente(int nivel){
-        int siguiente=-1;
-        for (int niveles : rondas.keySet()) {
-          if((nivel+1)==niveles){
-            siguiente=rondas.get(niveles);
-          }
+    public static void mostrarRondas(int nivel) {
+        if (nivel <= ganadorPos) {
+            System.out.println("\n\tRonda Nr.: " + nivel + "");
+            arbol.mostrarNiveles(navegar(nivel)); // nivel que le paso esta mal el usuario pone 1,2,3,4 pero tengo que
+                                                  // buscarlo rondas y que me de el nivel de larray de niveles
+            System.out.println("\n\tGanadores pasan a la Ronda Nr: " + (nivel + 1) + "\n\t");
+            arbol.mostrarNiveles(navegar(nivel + 1));
+        } else {
+            System.out.println("\n\n NOTA: ___ingrese una ronda valida___");
         }
-        if(siguiente==-1){
-            System.out.println(" No exite nivel ni resultado para la ronda: "+nivel);
+
+    }
+    // arbol.mostrarNiveles(nivelSiguiente(nivel));
+
+    private static int nivelSiguiente(int nivel) {
+        int siguiente = -1;
+        for (int niveles : rondas.keySet()) {
+            if ((nivel + 1) == niveles) {
+                siguiente = rondas.get(niveles);
+            }
+        }
+        if (siguiente == -1) {
+            System.out.println(" No exite nivel ni resultado para la ronda: " + nivel);
         }
 
         return siguiente;
     }
 
-    public static void rondasDisponibles(){
-      int i=0;
-      System.out.print("\t\t(");
+    public static void rondasDisponibles() {
+        int i = 0;
+        System.out.print("\t\t*** [");
         for (int ronda : rondas.keySet()) {
+            if (ronda != rondas.size()) {
 
-            if(i==rondas.size()-1){
-                System.out.print(ronda+" )");
+                if (i == rondas.size() - 2) {
+                    System.out.print(ronda + " ] ***");
 
-            }else{
+                } else {
 
-                System.out.print(ronda+", ");
+                    System.out.print(ronda + ", ");
+                }
             }
             i++;
-           
+
         }
 
-        
     }
 
     public static void emparejar() {
@@ -268,12 +275,12 @@ public class Torneo {
             int inicio = indices[indices.length - 1];
 
             for (int i = 0; i < (totalJugadores / 2); i++) {
-                
-                arbol.ingresarJugadores(inicio, listaJugadores2.get(i),listaJugadores2.get(i + (totalJugadores / 2)));
+
+                arbol.ingresarJugadores(inicio, listaJugadores2.get(i), listaJugadores2.get(i + (totalJugadores / 2)));
                 inicio += 2;
-               
+
             }
-            
+
             arbol.mostrarNiveles(navegar(1));
 
         } else {
@@ -281,53 +288,60 @@ public class Torneo {
         }
     }
 
-    private static int[] navegar(int nivelUsuario){
+    private static int[] navegar(int nivelUsuario) {
+        int[] nav = new int[2];
+        Integer indice = 1;
+        if (nivelUsuario > 0 && nivelUsuario <= ganadorPos) {
+            indice = rondas.get(nivelUsuario);
 
-    
-        Integer indice=1;
-        if( nivelUsuario>0 && nivelUsuario < 5 ){
-            indice=rondas.get(nivelUsuario);
-        }
-     
-        int niveles[]=indiceNivelesArbol();
-        int[] nav=new int[2];
+            int niveles[] = indiceNivelesArbol();
 
             for (int i = 0; i < niveles.length; i++) {
-                if(indice==niveles[i]){
-                    if(indice!=niveles[niveles.length-1]){
-                        nav[0]=indice;
-                        nav[1]=niveles[i+1];//fin
-                    }else{
-                        nav[0]=indice;
-                        nav[1]=-1;
+                if (indice == niveles[i]) {
+                    if (nivelUsuario != ganadorPos) {
+                        if (indice != niveles[niveles.length - 1]) {
+                            nav[0] = indice;
+                            nav[1] = niveles[i + 1];// fin
+                        } else {
+                            nav[0] = indice;
+                            nav[1] = -1;
+                        }
+                    } else {
+                        nav[0] = indice;
+                        nav[1] = -2;
                     }
+
                 }
             }
-
+        } else {
+            nav[0] = indice;
+            nav[1] = -3;
+        }
         return nav;
     }
+
     /*
      * Definir Ganador Random
      */
     public static void definirSets(int ronda, int jugadores) {
         int indice = 0;
         int largoArray = (jugadores * 2) - 1;
-        //Jugador ganadores[] = new Jugador[largoArray];
+        // Jugador ganadores[] = new Jugador[largoArray];
         if (totalJugadores > 0) {
 
-            indice=arbol.jugadoresVacios();
+            indice = arbol.jugadoresVacios();
 
             System.out.println("\n\n*************** [Ronda: " + ronda + "]*******************");
 
             for (int i = indice; i < largoArray - 1; i += 2) {
                 // System.out.println(largoArray);
                 Jugador jugador1 = arbol.verJugador(i);
-                Jugador jugador2 = arbol.verJugador(i+1);
+                Jugador jugador2 = arbol.verJugador(i + 1);
 
                 Jugador ganador = definirGanadorPartido(jugador1, jugador2);
-                //ganadores[i] = ganador;
-                //partidos.set((i / 2), ganador);
-                arbol.ingresarGanador((i/2),ganador);
+                // ganadores[i] = ganador;
+                // partidos.set((i / 2), ganador);
+                arbol.ingresarGanador((i / 2), ganador);
 
             }
         } else {
@@ -354,7 +368,7 @@ public class Torneo {
             System.out.println("*******************************************\n");
             ganador = jugador2;
         }
-       
+
         // reiniciar sets
         jugador1.resetSets();
         jugador2.resetSets();
@@ -382,12 +396,13 @@ public class Torneo {
         }
 
     }
-    
+
     public static void imprimirTorneo() {
         arbol.cargaPostOrden();
     }
 
-
-  
+   public static void prueba(){
+    arbol.pruebaMuestraArrayCompleto();
+   }
 
 }

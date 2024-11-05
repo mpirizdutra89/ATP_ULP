@@ -39,20 +39,29 @@ public class ArbolTorneo {
 
     public void mostrarNiveles(int[] nav) {
         int cant = 1;
-        if(nav[1]==-1){
-            nav[1]=partidos.size()-1;
+        if (nav[1] == -1) {
+            nav[1] = partidos.size();
         }
-     
-        if (this.totalJugadores > 0) {//sin jugadores no hay nada, no tiene que ver con los partidos a nivel de recorridos
-            for (int i = nav[0]; i <= nav[1];) {
-                //mostrar las parejas
+        
+        System.out.println("\n");
+        if (this.totalJugadores > 0 && nav[1]!=-3) {// sin jugadores no hay nada, no tiene que ver con los partidos a nivel de
+                                      // recorridos
+            if (nav[1] != -2) {
+                for (int i = nav[0]; i < nav[1];) {
+                    // mostrar las parejas
+                    System.out.print(
+                            "\t\t_Partido Nr." + cant + ":  [" + partidos.get(i) + "] & ["
+                                    + partidos.get(i + 1)
+                                    + "]   \n");
+                    cant++;
+                    i = i + 2;
+                }
+            }else{
                 System.out.print(
-                        "__Partido nr." + cant + ":  [" + partidos.get(i) + "] & ["
-                        + partidos.get(i + 1)
-                        + "]   ");
-                cant++;
-                i = i + 2;
+                    "\t\t_Ganador de la final: [" + partidos.get(0) + "]" );
             }
+        }else{
+            System.out.println("Ingrese una ronda valida");
         }
         System.out.println("\n\n");
 
@@ -74,11 +83,17 @@ public class ArbolTorneo {
         return indice;
     }
 
+    public  void pruebaMuestraArrayCompleto(){
+        for (Jugador j : partidos) {
+            System.out.println(j);
+        }
+    }
+
     public void cargaPostOrden() {
         int niveles = (int) (Math.log(totalJugadores) / Math.log(2));
         while (niveles > 0) {
             postOrden(0);
-            niveles --;
+            niveles--;
         }
 
     }
@@ -88,11 +103,11 @@ public class ArbolTorneo {
         if (posicion >= imprimirPartidos.size() || imprimirPartidos.get(posicion) == null) {
             return;
         }
-        //Recorrer hijo izq
+        // Recorrer hijo izq
         postOrden(2 * posicion + 1);
-        //Recorrer hijo der
+        // Recorrer hijo der
         postOrden(2 * posicion + 2);
-        //Visita nodo actual " AL iniciar nodo raíz"
+        // Visita nodo actual " AL iniciar nodo raíz"
         // System.out.print("[" + partidos.get(posicion) + "]");
         if (esHoja(posicion)) {
             System.out.print("\n[" + imprimirPartidos.get(posicion) + "]");
@@ -116,7 +131,7 @@ public class ArbolTorneo {
         }
 
         if (esHoja(posicion)) {
-            imprimirPartidos.set(posicion, jugador);//borro elemento hoja
+            imprimirPartidos.set(posicion, jugador);// borro elemento hoja
         }
     }
 }

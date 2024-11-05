@@ -103,7 +103,7 @@ public class Main {
                   //  int niveles[]=Torneo.indiceNivelesArbol();
 
                          System.out.println("*************** [Mostrar rondas del juego ] *******************");
-                         System.out.println("\t Rondas disponibles :");
+                         System.out.println("\tRondas disponibles (R1-inicial):");
                          Torneo.rondasDisponibles();
                          System.out.print("\n\tSeleccione una: ");
                          int opcion=leerScannerEntero(sc.nextLine());
@@ -113,8 +113,8 @@ public class Main {
                         
                     break;
                     case 5:
-                        
-                        modelo.Torneo.imprimirTorneo();
+                   // modelo.Torneo.prueba();
+                     modelo.Torneo.imprimirTorneo();
                         break;
                     case 6:
                         salirMenuP = true;
