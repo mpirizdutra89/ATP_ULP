@@ -106,4 +106,3 @@ public class Jugador {
     // TODO
     // método carga "Interface"
 }
-

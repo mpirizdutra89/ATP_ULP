@@ -398,7 +398,7 @@ public class Torneo {
     }
 
     public static void imprimirTorneo() {
-        arbol.imprimirTorneoNiveles();
+        arbol.cargaPostOrden();
     }
 
    public static void prueba(){
