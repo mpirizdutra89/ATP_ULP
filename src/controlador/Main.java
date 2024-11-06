@@ -113,7 +113,8 @@ public class Main {
                         
                     break;
                     case 5:
-                    System.out.println("\n|Final  \t|SemiFinal \t|Cuartos \t|Octavos \n");
+                    System.out.println("\n |Final  \t|SemiFinal \t|Cuartos \t|Octavos ");
+                    System.out.println("************************************************************\n\n");
                     modelo.Torneo.prueba();
                      //modelo.Torneo.imprimirTorneo();
                         break;
