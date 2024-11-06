@@ -13,7 +13,7 @@ public class Main {
 
     static Scanner sc;
 
-    ;
+    
 
     public static void main(String[] args) {
         menu();
