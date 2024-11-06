@@ -402,7 +402,7 @@ public class Torneo {
     }
 
    public static void prueba(){
-    arbol.pruebaMuestraArrayCompleto();
+    arbol.imprimirArbolDeLado();
    }
 
 }

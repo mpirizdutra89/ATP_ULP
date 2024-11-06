@@ -113,8 +113,8 @@ public class Main {
                         
                     break;
                     case 5:
-                   // modelo.Torneo.prueba();
-                     modelo.Torneo.imprimirTorneo();
+                    modelo.Torneo.prueba();
+                     //modelo.Torneo.imprimirTorneo();
                         break;
                     case 6:
                         salirMenuP = true;
