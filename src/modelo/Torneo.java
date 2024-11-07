@@ -7,8 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas
- *         2-3-4--5- array 7-16
+ * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
  */
 public class Torneo {
 
@@ -135,7 +134,6 @@ public class Torneo {
         // listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14, 0));
         // listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15, 0));
         // listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16, 0));
-
         totalJugadores = listaJugadores.size();
         // para poder ingresar a posiciones espesificas lo pasamos a
         // una arrayList
@@ -214,14 +212,13 @@ public class Torneo {
         // Integer valor = rondas.get(clave);
         // System.out.println("Clave: " + clave + ", Valor: " + valor);
         // }
-
     }
 
     public static void mostrarRondas(int nivel) {
         if (nivel <= ganadorPos) {
             System.out.println("\n\tRonda Nr.: " + nivel + "");
             arbol.mostrarNiveles(navegar(nivel)); // nivel que le paso esta mal el usuario pone 1,2,3,4 pero tengo que
-                                                  // buscarlo rondas y que me de el nivel de larray de niveles
+            // buscarlo rondas y que me de el nivel de larray de niveles
             System.out.println("\n\tGanadores pasan a la Ronda Nr: " + (nivel + 1) + "\n\t");
             arbol.mostrarNiveles(navegar(nivel + 1));
         } else {
@@ -397,12 +394,8 @@ public class Torneo {
 
     }
 
-    public static void imprimirTorneo() {
-        arbol.cargaPostOrden();
+    public static void prueba() {
+        arbol.imprimirArbolDeLado();
     }
-
-   public static void prueba(){
-    arbol.imprimirArbolDeLado();
-   }
 
 }

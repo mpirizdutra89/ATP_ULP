@@ -8,12 +8,11 @@ import modelo.ArbolTorneo;
 
 /**
  * @author Ferrando Carlos
+ * @author Piriz Martin
  */
 public class Main {
 
     static Scanner sc;
-
-    ;
 
     public static void main(String[] args) {
         menu();
@@ -59,7 +58,7 @@ public class Main {
                             try {
                                 if (Torneo.totalJugadores > 0) {
                                     System.out.println("==============================================================================");
-                                    System.out.println("\tLista del torneo tiene Jugadores. Cantidad actual: "+Torneo.totalJugadores);
+                                    System.out.println("\tLista del torneo tiene Jugadores. Cantidad actual: " + Torneo.totalJugadores);
                                     System.out.println("==============================================================================\n");
                                 }
                                 System.out.println("Escribe una de las opciones: ");
@@ -90,33 +89,32 @@ public class Main {
                         break;
                     case 2: // iniciar torneo, carga partidos obejtos cavio y los empareja
                         // limpiarConsola();
+
                         System.out.println("\n\n __Torneo iniciado__ ");
                         //Torneo.anexarRondas();
-                    // Torneo.rondasDisponibles();
-                           Torneo.configurarTorneo();
+                        // Torneo.rondasDisponibles();
+                        Torneo.configurarTorneo();
                         break;
                     case 3:
                         limpiarConsola();
                         modelo.Torneo.printListadoJugadoresActual();
                         break;
                     case 4:
-                  //  int niveles[]=Torneo.indiceNivelesArbol();
+                        //  int niveles[]=Torneo.indiceNivelesArbol();
 
-                         System.out.println("*************** [Mostrar rondas del juego ] *******************");
-                         System.out.println("\tRondas disponibles (R1-inicial):");
-                         Torneo.rondasDisponibles();
-                         System.out.print("\n\tSeleccione una: ");
-                         int opcion=leerScannerEntero(sc.nextLine());
-                         Torneo.mostrarRondas(opcion);
-                        
+                        System.out.println("*************** [Mostrar rondas del juego ] *******************");
+                        System.out.println("\tRondas disponibles (R1-inicial):");
+                        Torneo.rondasDisponibles();
+                        System.out.print("\n\tSeleccione una: ");
+                        int opcion = leerScannerEntero(sc.nextLine());
+                        Torneo.mostrarRondas(opcion);
 
-                        
-                    break;
+                        break;
                     case 5:
-                    System.out.println("\n |Final  \t|SemiFinal \t|Cuartos \t|Octavos ");
-                    System.out.println("************************************************************\n\n");
-                    modelo.Torneo.prueba();
-                     //modelo.Torneo.imprimirTorneo();
+                        System.out.println("\n |Final  \t|SemiFinal \t|Cuartos \t|Octavos ");
+                        System.out.println("************************************************************\n\n");
+                        modelo.Torneo.prueba();
+
                         break;
                     case 6:
                         salirMenuP = true;
