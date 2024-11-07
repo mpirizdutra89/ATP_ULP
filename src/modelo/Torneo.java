@@ -167,9 +167,10 @@ public class Torneo {
         while (niveles > 0) {
             ronda++;
             definirSets(ronda, (cantJugadores / ronda));
+            definirCampeon(ronda);
             niveles--;
-
         }
+
     }
 
     private static int calcularNiveles() {
@@ -323,7 +324,7 @@ public class Torneo {
     public static void definirSets(int ronda, int jugadores) {
         int indice = 0;
         int largoArray = (jugadores * 2) - 1;
-        // Jugador ganadores[] = new Jugador[largoArray];
+
         if (totalJugadores > 0) {
 
             indice = arbol.jugadoresVacios();
@@ -331,13 +332,11 @@ public class Torneo {
             System.out.println("\n\n*************** [Ronda: " + ronda + "]*******************");
 
             for (int i = indice; i < largoArray - 1; i += 2) {
-                // System.out.println(largoArray);
                 Jugador jugador1 = arbol.verJugador(i);
                 Jugador jugador2 = arbol.verJugador(i + 1);
 
                 Jugador ganador = definirGanadorPartido(jugador1, jugador2);
-                // ganadores[i] = ganador;
-                // partidos.set((i / 2), ganador);
+
                 arbol.ingresarGanador((i / 2), ganador);
 
             }
@@ -347,6 +346,15 @@ public class Torneo {
 
     }
 
+    private static void definirCampeon(int ronda) {
+        if (ronda == calcularNiveles()) {
+            System.out.println("\n*******************************************");
+            System.out.println("   El campeon del torneo ULP es: " );//falta agregar el campeon
+            System.out.println("*******************************************\n");
+        }
+    }
+
+    //Método para definir el ganador del partido
     private static Jugador definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
         Jugador ganador;
         int cont = 1;
@@ -373,6 +381,7 @@ public class Torneo {
         return ganador;
     }
 
+    //Método para definir el ganador del set
     private static void definirGanadorSet(Jugador jugador1, Jugador jugador2, int cont) {
         Random random = new Random();
 
@@ -384,7 +393,7 @@ public class Torneo {
         System.out.println("-------------------------------------------------");
         System.out.println("Resultado:");
         System.out.println("   " + jugador1 + " " + resultado1 + " - " + resultado2 + " " + jugador2);
-        System.out.println("==================================================");
+        System.out.println("=================================================");
 
         if (resultado1 > resultado2) {
             jugador1.incrementarSets();
@@ -394,6 +403,7 @@ public class Torneo {
 
     }
 
+    //Se deberia cambiar el nombre a imprimirArbol o algo así.
     public static void prueba() {
         arbol.imprimirArbolDeLado();
     }
