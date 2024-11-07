@@ -208,11 +208,6 @@ public class Torneo {
             ganadorPos = j;
             j++;
         }
-
-        // for (Integer clave : rondas.keySet()) {
-        // Integer valor = rondas.get(clave);
-        // System.out.println("Clave: " + clave + ", Valor: " + valor);
-        // }
     }
 
     public static void mostrarRondas(int nivel) {
@@ -227,7 +222,7 @@ public class Torneo {
         }
 
     }
-    // arbol.mostrarNiveles(nivelSiguiente(nivel));
+    
 
     private static int nivelSiguiente(int nivel) {
         int siguiente = -1;
@@ -258,7 +253,6 @@ public class Torneo {
                 }
             }
             i++;
-
         }
 
     }
@@ -347,9 +341,10 @@ public class Torneo {
     }
 
     private static void definirCampeon(int ronda) {
+       
         if (ronda == calcularNiveles()) {
             System.out.println("\n*******************************************");
-            System.out.println("   El campeon del torneo ULP es: " );//falta agregar el campeon
+            System.out.println("   El campeon del torneo ULP es: " + arbol.campeon());
             System.out.println("*******************************************\n");
         }
     }
@@ -387,7 +382,7 @@ public class Torneo {
 
         int resultado1 = random.nextInt(100) + 1;
         int resultado2 = random.nextInt(100) + 1;
-        // Si esto es muy repetitivo lo sacamos
+        
         System.out.println("=================================================");
         System.out.println("SET " + cont + ": " + jugador1 + " vs " + jugador2);
         System.out.println("-------------------------------------------------");
@@ -404,8 +399,24 @@ public class Torneo {
     }
 
     //Se deberia cambiar el nombre a imprimirArbol o algo así.
-    public static void prueba() {
+    public static void imprimirArbol() {
         arbol.imprimirArbolDeLado();
     }
-
+    
+    public static Jugador devolverCampeon(){
+        return arbol.campeon();
+    }
+    
+    public static void encabezadoTorneo(){
+        int niveles = calcularNiveles();
+        String titulo= "";
+        String[] rondas = {"Final","Semifinal","Cuartos","Octavos","Dieciseisavos","Treintaidosavos","Sesentaicuatroavos"};
+        
+            
+        for (int i = 0; i <= niveles; i++) {
+            titulo += "|"+rondas[i] + "    \t";
+        }
+        
+        System.out.println(titulo);
+    }
 }

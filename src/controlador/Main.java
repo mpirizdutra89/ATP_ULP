@@ -88,15 +88,13 @@ public class Main {
 
                         break;
                     case 2: // iniciar torneo, carga partidos obejtos cavio y los empareja
-                        // limpiarConsola();
-                        if (Torneo.totalJugadores < 0) {
+                       
+                        if (Torneo.totalJugadores <= 0) {
                             System.out.println("==============================================================================");
                             System.out.println("\tPara cargar un torneo, primero debe cargar los jugadores!!");
                             System.out.println("==============================================================================");
                         } else {
                             System.out.println("\n\n __Torneo iniciado__ ");
-                            //Torneo.anexarRondas();
-                            // Torneo.rondasDisponibles();
                             Torneo.configurarTorneo();
                         }
                         break;
@@ -105,21 +103,30 @@ public class Main {
                         modelo.Torneo.printListadoJugadoresActual();
                         break;
                     case 4:
-                        //  int niveles[]=Torneo.indiceNivelesArbol();
-
-                        System.out.println("*************** [Mostrar rondas del juego ] *******************");
-                        System.out.println("\tRondas disponibles (R1-inicial):");
-                        Torneo.rondasDisponibles();
-                        System.out.print("\n\tSeleccione una: ");
-                        int opcion = leerScannerEntero(sc.nextLine());
-                        Torneo.mostrarRondas(opcion);
-
+                        
+                        if(Torneo.devolverCampeon() != null){                    
+                            System.out.println("*************** [Mostrar rondas del juego ] *******************");
+                            System.out.println("\tRondas disponibles (R1-inicial):");
+                            Torneo.rondasDisponibles();
+                            System.out.print("\n\tSeleccione una: ");
+                            int opcion = leerScannerEntero(sc.nextLine());
+                            Torneo.mostrarRondas(opcion);
+                        }else{
+                             System.out.println("==============================================================================");
+                            System.out.println("\tPrimero debes iniciar el torneo!!");
+                            System.out.println("==============================================================================");
+                        }
                         break;
                     case 5:
-                        System.out.println("\n |Final  \t|SemiFinal \t|Cuartos \t|Octavos ");
-                        System.out.println("************************************************************\n\n");
-                        modelo.Torneo.prueba();
-
+                        if(Torneo.devolverCampeon() != null){                  
+                            Torneo.encabezadoTorneo();
+                            System.out.println("************************************************************\n\n");
+                            modelo.Torneo.imprimirArbol();
+                        }else{
+                             System.out.println("==============================================================================");
+                            System.out.println("\tPrimero debes iniciar el torneo!!");
+                            System.out.println("==============================================================================");
+                        }
                         break;
                     case 6:
                         salirMenuP = true;
@@ -170,4 +177,6 @@ public class Main {
             e.printStackTrace();
         }
     }
+    
+    
 }

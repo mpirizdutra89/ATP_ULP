@@ -125,6 +125,13 @@ public class ArbolTorneo {
         imprimirDeLado(0, 0);
     }
 
+    /* 
+        * Recorrido inorden 
+        Hijo izquierdo: Se recorre primero, moviéndose hacia los nodos más a la izquierda.
+        Raíz: El nodo actual se imprime en su nivel de profundidad.
+        Hijo derecho: Después se recorre el subárbol derecho, lo que permite que este aparezca alineado hacia la derecha en la impresión.
+        * 
+    */
     private void imprimirDeLado(int posicion, int nivel) {
         if (posicion >= partidos.size() || partidos.get(posicion) == null) {
             return;
@@ -143,13 +150,13 @@ public class ArbolTorneo {
         // hijo derecho
         imprimirDeLado(2 * posicion + 2, nivel + 1);
     }
-
-    /* 
- * Recorrido inorden 
-Hijo izquierdo: Se recorre primero, moviéndose hacia los nodos más a la izquierda.
-Raíz: El nodo actual se imprime en su nivel de profundidad.
-Hijo derecho: Después se recorre el subárbol derecho, lo que permite que este aparezca alineado hacia la derecha en la impresión.
- * 
-     */
     
+    public Jugador campeon(){
+        Jugador jugador = null;
+        if(partidos.size() > 0){
+            jugador = partidos.get(0);
+        }
+        return jugador;
+    }
+   
 }
