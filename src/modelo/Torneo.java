@@ -7,7 +7,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * @author Ferrando Carlos pedir cantidad de jugadores 4-8-16-32 etapas 2-3-4--5- array 7-16
+ * @author Ferrando Carlos
+ * @author Piriz Martin
  */
 public class Torneo {
 
@@ -15,7 +16,6 @@ public class Torneo {
     private static ArrayList<Jugador> listaJugadores2;
     private static HashMap<Integer, Integer> rondas = new HashMap<>();
     private static Integer ganadorPos;
-    private static ArrayList<Integer> accederRonda;
     public static int totalJugadores = 0;
     private static ArbolTorneo arbol;
 
@@ -120,7 +120,7 @@ public class Torneo {
         listaJugadores.add(new Jugador("Novak", "Djokovic", "Serbia", 1, 0));
         listaJugadores.add(new Jugador("Carlos", "Alcaraz", "España", 2, 0));
         listaJugadores.add(new Jugador("Daniil", "Medvedev", "Rusia", 3, 0));
-        listaJugadores.add(new Jugador("Stefanos", "Tsitsipas", "Grecia", 4, 0));
+        listaJugadores.add(new Jugador("Stefanos", "Tsitsip", "Grecia", 4, 0));
         listaJugadores.add(new Jugador("Andrey", "Rublev", "Rusia", 5, 0));
         listaJugadores.add(new Jugador("Holger", "Rune", "Dinamarca", 6, 0));
         listaJugadores.add(new Jugador("Casper", "Ruud", "Noruega", 7, 0));
@@ -131,9 +131,9 @@ public class Torneo {
         // listaJugadores.add(new Jugador("Alexander", "Zverev", "Alemania", 11, 0));
         // listaJugadores.add(new Jugador("Cameron", "Norrie", "Reino Unido", 12, 0));
         // listaJugadores.add(new Jugador("Hubert", "Hurkacz", "Polonia", 13, 0));
-        // listaJugadores.add(new Jugador("Karen", "Khachanov", "Rusia", 14, 0));
-        // listaJugadores.add(new Jugador("Felix", "Auger-Aliassime", "Canadá", 15, 0));
-        // listaJugadores.add(new Jugador("Alex", "De Minaur", "Australia", 16, 0));
+        // listaJugadores.add(new Jugador("Karen", "Khacha", "Rusia", 14, 0));
+        // listaJugadores.add(new Jugador("Felix", "Auger", "Canadá", 15, 0));
+        // listaJugadores.add(new Jugador("Alex", "Minaur", "Australia", 16, 0));
         totalJugadores = listaJugadores.size();
         // para poder ingresar a posiciones espesificas lo pasamos a
         // una arrayList
@@ -396,13 +396,23 @@ public class Torneo {
 
     /* Intancia al metodo para podedr ser usado en el main */
     public static Jugador devolverCampeon(){
-        return arbol.campeon();
+        try {
+            return arbol.campeon();
+        } catch (NullPointerException e) {
+            return null;
+        }
+        
     }
 
 
     /* Intancia el metodo de arbol para poder ser llamado del main */
     public static void imprimirArbol() {
-        arbol.imprimirArbol();
+        try {
+            arbol.imprimirArbol();
+        } catch (NullPointerException e) {
+           System.out.println("\n"); //cartel en el main
+        }
+        
     }
     
   
@@ -412,7 +422,8 @@ public class Torneo {
         String titulo= "";
         String[] rondas = {"Final","Semifinal","Cuartos","Octavos","Dieciseisavos","Treintaidosavos","Sesentaicuatroavos"};
         
-            
+        System.out.println("\n"); 
+
         for (int i = 0; i <= niveles; i++) {
             titulo += "|"+rondas[i] + "    \t";
         }

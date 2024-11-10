@@ -1,23 +1,27 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.Stack;
+
 
 /**
  * @author Ferrando Carlos
+ * @author Piriz Martin
  */
 public class ArbolTorneo {
 
     private ArrayList<Jugador> partidos;
-    private ArrayList<Jugador> imprimirPartidos;
     private int totalJugadores;
 
     public ArbolTorneo(int totalJugadores) {
+
         this.totalJugadores = totalJugadores;
         partidos = new ArrayList<>();
+
         Jugador jugador = new Jugador("nombre", "apellido", "nacionalidad", 0, 0);
+       
         int niveles = (int) (Math.log(totalJugadores) / Math.log(2));
         int maxNodos = (int) Math.pow(2, niveles + 1) - 1;
+
         inicializarArbol(maxNodos, jugador);
     }
 

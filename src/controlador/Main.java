@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import modelo.Torneo;
-import modelo.ArbolTorneo;
+
 
 /**
  * @author Ferrando Carlos
