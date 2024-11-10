@@ -159,19 +159,7 @@ public class Torneo {
         }
     }
 
-    private static void jugarRondas() {
-        int ronda = 0;
-        int cantJugadores = totalJugadores;
-        int niveles = calcularNiveles();
-
-        while (niveles > 0) {
-            ronda++;
-            definirSets(ronda, (cantJugadores / ronda));
-            definirCampeon(ronda);
-            niveles--;
-        }
-
-    }
+  
 
     private static int calcularNiveles() {
         int rondas = 0;
@@ -224,19 +212,7 @@ public class Torneo {
     }
     
 
-    private static int nivelSiguiente(int nivel) {
-        int siguiente = -1;
-        for (int niveles : rondas.keySet()) {
-            if ((nivel + 1) == niveles) {
-                siguiente = rondas.get(niveles);
-            }
-        }
-        if (siguiente == -1) {
-            System.out.println(" No exite nivel ni resultado para la ronda: " + nivel);
-        }
-
-        return siguiente;
-    }
+  
 
     public static void rondasDisponibles() {
         int i = 0;
@@ -313,8 +289,25 @@ public class Torneo {
     }
 
     /*
-     * Definir Ganador Random
+     *  jUGADAS DEL TORNEO
      */
+
+     private static void jugarRondas() {
+        int ronda = 0;
+        int cantJugadores = totalJugadores;
+        int niveles = calcularNiveles();
+
+        while (niveles > 0) {
+            ronda++;
+            definirSets(ronda, (cantJugadores / ronda));
+            definirCampeon(ronda);
+            niveles--;
+        }
+
+    }
+
+
+
     public static void definirSets(int ronda, int jugadores) {
         int indice = 0;
         int largoArray = (jugadores * 2) - 1;
@@ -324,13 +317,13 @@ public class Torneo {
             indice = arbol.jugadoresVacios();
 
             System.out.println("\n\n*************** [Ronda: " + ronda + "]*******************");
-
+            
             for (int i = indice; i < largoArray - 1; i += 2) {
                 Jugador jugador1 = arbol.verJugador(i);
                 Jugador jugador2 = arbol.verJugador(i + 1);
 
                 Jugador ganador = definirGanadorPartido(jugador1, jugador2);
-
+                //se usa posicion del hijo izquierdo / 2 para saber su padre 
                 arbol.ingresarGanador((i / 2), ganador);
 
             }
@@ -340,14 +333,7 @@ public class Torneo {
 
     }
 
-    private static void definirCampeon(int ronda) {
-       
-        if (ronda == calcularNiveles()) {
-            System.out.println("\n*******************************************");
-            System.out.println("   El campeon del torneo ULP es: " + arbol.campeon());
-            System.out.println("*******************************************\n");
-        }
-    }
+   
 
     //Método para definir el ganador del partido
     private static Jugador definirGanadorPartido(Jugador jugador1, Jugador jugador2) {
@@ -398,14 +384,28 @@ public class Torneo {
 
     }
 
-    //Se deberia cambiar el nombre a imprimirArbol o algo así.
-    public static void imprimirArbol() {
-        arbol.imprimirArbolDeLado();
+
+    private static void definirCampeon(int ronda) {
+       
+        if (ronda == calcularNiveles()) {
+            System.out.println("\n*******************************************");
+            System.out.println("   El campeon del torneo ULP es: " + arbol.campeon());
+            System.out.println("*******************************************\n");
+        }
     }
-    
+
+    /* Intancia al metodo para podedr ser usado en el main */
     public static Jugador devolverCampeon(){
         return arbol.campeon();
     }
+
+
+    /* Intancia el metodo de arbol para poder ser llamado del main */
+    public static void imprimirArbol() {
+        arbol.imprimirArbol();
+    }
+    
+  
     
     public static void encabezadoTorneo(){
         int niveles = calcularNiveles();

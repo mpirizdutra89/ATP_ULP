@@ -84,45 +84,20 @@ public class ArbolTorneo {
         return indice;
     }
 
-    public void pruebaMuestraArrayCompleto() {
-        for (Jugador j : partidos) {
-            System.out.println(j);
+    public Jugador campeon(){
+        Jugador jugador = null;
+        if(partidos.size() > 0){
+            jugador = partidos.get(0);
         }
+        return jugador;
     }
 
-    //Pruebas martin
-    public void postordenIterativo() {
-        Stack<Integer> stack = new Stack<>();
-        Stack<Integer> resultado = new Stack<>(); // Para almacenar los nodos en el orden postorden
+    
+    /* Print de arbol binario usando el recorrido inorde INORDEN, pero modificado.*/
 
-        stack.push(0); // Empezamos desde la raíz
 
-        while (!stack.isEmpty()) {
-            int nodo = stack.pop();
-            resultado.push(nodo);
-
-            // Empujar el hijo izquierdo primero para que se procese después en el postorden
-            int hijoIzquierdo = 2 * nodo + 1;
-            int hijoDerecho = 2 * nodo + 2;
-
-            if (hijoIzquierdo < partidos.size()) {//&& arbol[hijoIzquierdo] != -1) {
-                stack.push(hijoIzquierdo);
-            }
-            if (hijoDerecho < partidos.size()) {
-                stack.push(hijoDerecho);
-            }
-        }
-
-        // Imprimir el contenido de "resultado" que contiene el recorrido postorden
-        System.out.println("Recorrido en postorden (de octavos a ganador):");
-        while (!resultado.isEmpty()) {
-            int nodo = resultado.pop();
-            System.out.println("Jugador " + partidos.get(nodo));
-        }
-    }
-
-    public void imprimirArbolDeLado() {
-        imprimirDeLado(0, 0);
+    public void imprimirArbol() {
+        imprimirDeLadoInorden(0, 0);
     }
 
     /* 
@@ -132,13 +107,13 @@ public class ArbolTorneo {
         Hijo derecho: Después se recorre el subárbol derecho, lo que permite que este aparezca alineado hacia la derecha en la impresión.
         * 
     */
-    private void imprimirDeLado(int posicion, int nivel) {
+    private void imprimirDeLadoInorden(int posicion, int nivel) {
         if (posicion >= partidos.size() || partidos.get(posicion) == null) {
             return;
         }
 
         //  hijo izquierdo
-        imprimirDeLado(2 * posicion + 1, nivel + 1);
+        imprimirDeLadoInorden(2 * posicion + 1, nivel + 1);
 
         // Imprimir el nodo con la sangría adecuada
         for (int i = 0; i < nivel; i++) {
@@ -148,15 +123,9 @@ public class ArbolTorneo {
         System.out.println(partidos.get(posicion));
 
         // hijo derecho
-        imprimirDeLado(2 * posicion + 2, nivel + 1);
+        imprimirDeLadoInorden(2 * posicion + 2, nivel + 1);
     }
     
-    public Jugador campeon(){
-        Jugador jugador = null;
-        if(partidos.size() > 0){
-            jugador = partidos.get(0);
-        }
-        return jugador;
-    }
+  
    
 }
