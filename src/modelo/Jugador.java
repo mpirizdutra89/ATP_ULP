@@ -103,6 +103,5 @@ public class Jugador {
         return Objects.hash(ranking); // Hash solo por ranking
     }
 
-    // TODO
-    // método carga "Interface"
+    
 }
